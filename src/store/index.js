@@ -6,7 +6,11 @@ export default createStore({
     maxStep: 6
   },
   getters: {},
-  mutations: {},
+  mutations: {
+    onNextStep(state) {
+      state.step++
+    }
+  },
   actions: {},
   modules: {}
 })

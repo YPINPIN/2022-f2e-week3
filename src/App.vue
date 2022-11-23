@@ -1,40 +1,29 @@
 <template>
-  <section class="bg"></section>
   <ProgressBar />
-  <main></main>
+  <Step0 v-if="step === 0"></Step0>
+
   <footer>
     <p>© 2022 The F2E | UI Design - EG | F2E - PINPIN</p>
   </footer>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import ProgressBar from './components/ProgressBar.vue'
+import Step0 from './components/step/Step0.vue'
+
 export default {
+  computed: {
+    ...mapState(['step']),
+  },
   components: {
     ProgressBar,
+    Step0,
   },
 }
 </script>
 
 <style lang="scss">
-main {
-  max-width: 1440px;
-  height: 100%;
-  margin: 0 auto;
-}
-
-// 背景
-.bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -100;
-  width: 100%;
-  height: 100%;
-  background-image: url('./assets/images/bg/bg_village.png');
-  background-size: 1440px 1024px;
-}
-
 footer {
   display: flex;
   justify-content: center;
