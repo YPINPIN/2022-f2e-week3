@@ -1,17 +1,26 @@
 <template>
-  <div class="dialog-wrapper">
+  <div class="dialog-wrapper" @click="onClick">
     <div class="dialog-title">
       <h3>（謎之音）</h3>
       <div class="dialog-title-shadow"></div>
     </div>
-    <p class="dialog-talk talk">
-      呦呼 ， 歡迎進入 「SCRUM 新手村」 ， 在正式加入專案開發之前
-      ，需要請你先了解 Scrum 的流程與精神 ！ <br />
-      <br />
-      請接受挑戰任務 ， 成功通過 Scrum 新手村的挑戰任務吧～
-    </p>
+    <transition name="scale" @after-enter="isBtnShow = true">
+      <p class="dialog-talk talk" v-show="isDialogShow">
+        呦呼 ， 歡迎進入 「SCRUM 新手村」 ， 在正式加入專案開發之前
+        ，需要請你先了解 Scrum 的流程與精神 ！ <br />
+        <br />
+        請接受挑戰任務 ， 成功通過 Scrum 新手村的挑戰任務吧～
+      </p>
+    </transition>
   </div>
-  <ButtomUI text="接受挑戰" top="700px" @clickEvent="onStartClick" />
+  <transition name="fade">
+    <ButtomUI
+      v-show="isBtnShow"
+      text="接受挑戰"
+      top="700px"
+      @clickEvent="onStartClick"
+    />
+  </transition>
 </template>
 
 <script>
@@ -19,12 +28,25 @@ import ButtomUI from '../components/ButtomUI.vue'
 
 export default {
   name: 'DialogUI',
+  data() {
+    return {
+      // 使否開始顯示對話
+      isDialogShow: false,
+      // 使否開始顯示按鈕
+      isBtnShow: false,
+    }
+  },
+  emits: ['startgame'],
   components: {
     ButtomUI,
   },
   methods: {
     onStartClick() {
-      this.$store.commit('onNextStep')
+      this.$emit('startgame')
+    },
+    onDialogShow() {
+      console.log('onDialogShow')
+      this.isDialogShow = true
     },
   },
 }
@@ -79,6 +101,29 @@ export default {
   }
   &-talk {
     max-width: 707px;
+    transform-origin: top center;
   }
+}
+
+.scale-enter-from {
+  transform: scaleY(0);
+  opacity: 0;
+}
+.scale-enter-active {
+  transition: transform 1s ease, opacity 0.5s ease;
+}
+.scale-enter-to {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter-to {
+  opacity: 1;
 }
 </style>

@@ -2,62 +2,98 @@
   <section class="step-0">
     <section class="bg">
       <div class="bg-back">
-        <div class="leaf-dark">
-          <img
-            class="leaf-dark-top"
-            src="@/assets/images/bg/bg_leafDark_4_t.png"
-            alt="leafDark_4_t"
-          />
-          <img
-            class="leaf-dark-right"
-            src="@/assets/images/bg/bg_leafDark_3_r.png"
-            alt="leafDark_3_r"
-          />
-          <img
-            class="leaf-dark-bottom"
-            src="@/assets/images/bg/bg_leafDark_2_b.png"
-            alt="leafDark_2_b"
-          />
-          <img
-            class="leaf-dark-left"
-            src="@/assets/images/bg/bg_leafDark_1_l.png"
-            alt="leafDark_1_l"
-          />
-        </div>
-        <div class="leaf-tint" v-if="!isEnter">
-          <img
-            class="leaf-tint-top"
-            src="@/assets/images/bg/bg_leafTint_3_t.png"
-            alt="leafTint_4_t"
-          />
-          <img
-            class="leaf-tint-right"
-            src="@/assets/images/bg/bg_leafTint_4_rb.png"
-            alt="leafTint_3_r"
-          />
-          <img
-            class="leaf-tint-bottom"
-            src="@/assets/images/bg/bg_leafTint_2_lb.png"
-            alt="leafTint_2_b"
-          />
-          <img
-            class="leaf-tint-left"
-            src="@/assets/images/bg/bg_leafTint_1_lt.png"
-            alt="leafTint_1_l"
-          />
-        </div>
+        <transition name="dark" @after-leave="nextStep">
+          <div class="leaf-dark" v-if="!isLeafMoveEnd">
+            <transition name="top" @after-leave="isLeafMoveEnd = true">
+              <img
+                v-if="!isLeafMoveStart"
+                class="leaf-dark-top"
+                src="@/assets/images/bg/bg_leafDark_4_t.png"
+                alt="leafDark_4_t"
+              />
+            </transition>
+            <transition name="right">
+              <img
+                v-if="!isLeafMoveStart"
+                class="leaf-dark-right"
+                src="@/assets/images/bg/bg_leafDark_3_r.png"
+                alt="leafDark_3_r"
+              />
+            </transition>
+            <transition name="bottom">
+              <img
+                v-if="!isLeafMoveStart"
+                class="leaf-dark-bottom"
+                src="@/assets/images/bg/bg_leafDark_2_b.png"
+                alt="leafDark_2_b"
+              />
+            </transition>
+            <transition name="left">
+              <img
+                v-if="!isLeafMoveStart"
+                class="leaf-dark-left"
+                src="@/assets/images/bg/bg_leafDark_1_l.png"
+                alt="leafDark_1_l"
+              />
+            </transition>
+          </div>
+        </transition>
+        <transition name="tint">
+          <div class="leaf-tint" v-if="!isLeafMove">
+            <transition name="top" @after-leave="isLeafMove = true">
+              <img
+                v-if="!isEnter"
+                class="leaf-tint-top"
+                src="@/assets/images/bg/bg_leafTint_3_t.png"
+                alt="leafTint_4_t"
+              />
+            </transition>
+            <transition name="right">
+              <img
+                v-if="!isEnter"
+                class="leaf-tint-right"
+                src="@/assets/images/bg/bg_leafTint_4_rb.png"
+                alt="leafTint_3_r"
+              />
+            </transition>
+            <transition name="bottom">
+              <img
+                v-if="!isEnter"
+                class="leaf-tint-bottom"
+                src="@/assets/images/bg/bg_leafTint_2_lb.png"
+                alt="leafTint_2_b"
+              />
+            </transition>
+            <transition name="left">
+              <img
+                v-if="!isEnter"
+                class="leaf-tint-left"
+                src="@/assets/images/bg/bg_leafTint_1_lt.png"
+                alt="leafTint_1_l"
+              />
+            </transition>
+          </div>
+        </transition>
       </div>
     </section>
-    <section class="content" v-if="!isEnter">
-      <div class="content-logo">
-        <img src="@/assets/images/logo/logo_hole.png" alt="logo_hole" />
-      </div>
-      <h2 class="content-title">深入敏捷の村一探究竟</h2>
-      <ButtomUI text="進入村莊" top="669px" @clickEvent="isEnter = true" />
-    </section>
-    <section class="content" v-else>
-      <DialogUI />
-    </section>
+    <transition name="fade">
+      <section class="content" v-if="!isEnter">
+        <div class="content-logo">
+          <img src="@/assets/images/logo/logo_hole.png" alt="logo_hole" />
+        </div>
+        <h2 class="content-title">深入敏捷の村一探究竟</h2>
+        <ButtomUI text="進入村莊" top="669px" @clickEvent="isEnter = true" />
+      </section>
+    </transition>
+    <transition
+      name="fadeDialog"
+      @after-enter="dialogShow"
+      @after-leave="this.isLeafMoveStart = true"
+    >
+      <section class="content" v-if="isEnter && !isStart">
+        <DialogUI ref="dialog" @startgame="this.isStart = true" />
+      </section>
+    </transition>
   </section>
 </template>
 
@@ -68,12 +104,34 @@ import DialogUI from '@/components/DialogUI.vue'
 export default {
   data() {
     return {
+      // 是否點擊進入村莊
       isEnter: false,
+      // 樹葉是否已完成散開動畫
+      isLeafMove: false,
+      // 第二層樹葉散開動畫
+      isLeafMoveStart: false,
+      // 第二層樹葉是否已完成散開動畫
+      isLeafMoveEnd: false,
+      // 是否點擊接受挑戰
+      isStart: false,
     }
   },
   components: {
     ButtomUI,
     DialogUI,
+  },
+  methods: {
+    dialogShow() {
+      console.log('dialogShow')
+      this.$refs.dialog.onDialogShow()
+    },
+    leaf2Move() {
+      console.log('leaf2Move')
+      this.isLeafMove2 = true
+    },
+    nextStep() {
+      this.$store.commit('onNextStep')
+    },
   },
 }
 </script>
@@ -191,5 +249,60 @@ export default {
     text-align: center;
     color: var(--text-default);
   }
+}
+
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+
+.tint-leave-active {
+  transition: opacity 0s ease;
+}
+.tint-leave-to {
+  opacity: 0;
+}
+
+.dark-leave-active {
+  transition: opacity 1s ease;
+}
+.dark-leave-to {
+  opacity: 0;
+}
+
+.top-leave-active,
+.right-leave-active,
+.bottom-leave-active,
+.left-leave-active {
+  transition: transform 1s ease 0.5s;
+}
+.top-leave-to {
+  transform: translateY(-464px); //translateY(-400px);
+}
+.right-leave-to {
+  transform: translateX(738px); //translateX(646px);
+}
+.bottom-leave-to {
+  transform: translateY(488px); //translateY(343px);
+}
+.left-leave-to {
+  transform: translateX(-795px); //translateX(-566px);
+}
+
+.fadeDialog-enter-from,
+.fadeDialog-leave-to {
+  opacity: 0;
+}
+.fadeDialog-enter-active {
+  transition: opacity 0.5s ease 1.5s;
+}
+.fadeDialog-enter-to,
+.fadeDialog-leave-from {
+  opacity: 1;
+}
+.fadeDialog-leave-active {
+  transition: opacity 0.5s ease;
 }
 </style>
