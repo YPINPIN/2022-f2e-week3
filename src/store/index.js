@@ -1,7 +1,10 @@
 import { createStore } from 'vuex'
 
 export default createStore({
-  state: {},
+  state: {
+    step: 0,
+    maxStep: 6
+  },
   getters: {},
   mutations: {},
   actions: {},
