@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog-wrapper" @click="onClick">
+  <div class="dialog-wrapper">
     <div class="dialog-title">
       <h3>（謎之音）</h3>
       <div class="dialog-title-shadow"></div>
