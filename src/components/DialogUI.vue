@@ -4,7 +4,7 @@
       <h3>（謎之音）</h3>
       <div class="dialog-title-shadow"></div>
     </div>
-    <transition name="scale" @after-enter="isBtnShow = true">
+    <transition name="show">
       <p class="dialog-talk talk" v-show="isDialogShow">
         呦呼 ， 歡迎進入 「SCRUM 新手村」 ， 在正式加入專案開發之前
         ，需要請你先了解 Scrum 的流程與精神 ！ <br />
@@ -15,7 +15,7 @@
   </div>
   <transition name="fade">
     <ButtomUI
-      v-show="isBtnShow"
+      v-show="isDialogShow"
       text="接受挑戰"
       top="700px"
       @clickEvent="onStartClick"
@@ -32,8 +32,6 @@ export default {
     return {
       // 使否開始顯示對話
       isDialogShow: false,
-      // 使否開始顯示按鈕
-      isBtnShow: false,
     }
   },
   emits: ['startgame'],
@@ -62,11 +60,11 @@ export default {
     width: 80%;
     max-width: 908px;
     height: 430px;
-    padding: 0 40px;
+    padding: 100px 40px 0;
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
 
     background: var(--bg-dark-60);
     border: 2px solid var(--primary-default);
@@ -102,26 +100,25 @@ export default {
   &-talk {
     max-width: 707px;
     transform-origin: top center;
+    overflow: hidden;
   }
 }
 
-.scale-enter-from {
-  transform: scaleY(0);
-  opacity: 0;
+.show-enter-from {
+  height: 0;
 }
-.scale-enter-active {
-  transition: transform 1s ease, opacity 0.5s ease;
+.show-enter-active {
+  transition: height 1s ease, opacity 0.5s ease;
 }
-.scale-enter-to {
-  transform: scaleY(1);
-  opacity: 1;
+.show-enter-to {
+  height: 100%;
 }
 
 .fade-enter-from {
   opacity: 0;
 }
 .fade-enter-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease 0.5s;
 }
 .fade-enter-to {
   opacity: 1;
