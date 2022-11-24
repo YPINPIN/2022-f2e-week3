@@ -1,6 +1,7 @@
 <template>
   <ProgressBar />
   <Step0 v-if="step === 0"></Step0>
+  <Step1 v-else-if="step === 1"></Step1>
 
   <footer>
     <p>© 2022 The F2E | UI Design - EG | F2E - PINPIN</p>
@@ -11,6 +12,7 @@
 import { mapState } from 'vuex'
 import ProgressBar from './components/ProgressBar.vue'
 import Step0 from './components/step/Step0.vue'
+import Step1 from './components/step/Step1.vue'
 
 export default {
   computed: {
@@ -19,6 +21,7 @@ export default {
   components: {
     ProgressBar,
     Step0,
+    Step1,
   },
 }
 </script>
