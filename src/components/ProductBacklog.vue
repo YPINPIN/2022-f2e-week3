@@ -18,7 +18,7 @@
           v-model="myList"
           :group="{ name: 'product', pull: false }"
           ghost-class="ghost"
-          animation="800"
+          animation="1000"
           item-key="id"
         >
           <template #item="{ element }">
@@ -57,7 +57,7 @@
       v-model="myItem2"
       :group="{ name: 'product', put: false }"
       ghost-class="ghost"
-      animation="800"
+      animation="1000"
       item-key="id"
     >
       <template #item="{ element }">
@@ -71,7 +71,7 @@
       v-model="myItem3"
       :group="{ name: 'product', put: false }"
       ghost-class="ghost"
-      animation="800"
+      animation="1000"
       item-key="id"
     >
       <template #item="{ element }">
@@ -85,7 +85,7 @@
       v-model="myItem4"
       :group="{ name: 'product', put: false }"
       ghost-class="ghost"
-      animation="800"
+      animation="1000"
       item-key="id"
     >
       <template #item="{ element }">
@@ -94,18 +94,41 @@
         </div>
       </template>
     </draggable>
+    <div class="start-block block-test" v-if="!isBtnShow">
+      <img class="arrow2" src="@/assets/images/other/arrow2.svg" alt="arrow2" />
+      <div class="list-main-item item-test">前台職缺列表、應徵</div>
+      <div class="list-main-item item-test item-move">
+        前台職缺列表、應徵
+        <img
+          class="hand-finger"
+          src="@/assets/images/other/hand-finger.svg"
+          alt="hand-finger"
+        />
+      </div>
+    </div>
   </div>
   <ButtomUI
+    v-if="isBtnShow"
     text="我完成了"
     :isDisable="isBtnDisable"
     top="calc(100% - 84px - 66px)"
     left="calc(100% - 40px - 94px)"
+    @clickEvent="onBtnDone"
+  />
+  <ClickMask
+    v-if="!isBtnShow"
+    class="click-mask-3"
+    :isBg="false"
+    :isTip="false"
+    @mask-click="onMaskClick"
   />
 </template>
 
 <script>
+import gsap from 'gsap'
 import draggable from 'vuedraggable'
 import ButtomUI from './ButtomUI.vue'
+import ClickMask from './ClickMask.vue'
 
 export default {
   name: 'ProductBacklog',
@@ -118,15 +141,86 @@ export default {
         { id: 4, info: '後台職缺管理功能（資訊上架、下架、顯示應徵者資料）' },
       ],
       myList: [],
+      isBtnShow: false,
     }
+  },
+  emits: ['btn-mask', 'btn-done'],
+  mounted() {
+    gsap.set(['.product'], {
+      autoAlpha: 0,
+    })
+    const timeline = gsap.timeline()
+    timeline
+      .to('.product', {
+        duration: 0.5,
+        autoAlpha: 1,
+      })
+      .to('.block1, .block2, .block3, .block4', {
+        duration: 0.5,
+        opacity: 0.3,
+      })
+      .from(
+        '.arrow2',
+        {
+          duration: 0.5,
+          opacity: 0,
+        },
+        '<'
+      )
+      .to(
+        '.item-move',
+        {
+          duration: 0.5,
+          width: 416,
+          height: 96,
+          x: -511,
+          y: -265,
+        },
+        '<'
+      )
   },
   components: {
     draggable,
     ButtomUI,
+    ClickMask,
   },
   computed: {
     isBtnDisable() {
       return this.myList.length !== 4
+    },
+  },
+  methods: {
+    onBtnDone() {
+      this.$emit('btn-done')
+    },
+    onMaskClick() {
+      console.log('onMaskClick')
+      this.$emit('btn-mask')
+      const timeline = gsap.timeline()
+      timeline
+        .to('.block1, .block2, .block3, .block4', {
+          duration: 0.5,
+          opacity: 1,
+        })
+        .to(
+          '.arrow2',
+          {
+            duration: 0.5,
+            autoAlpha: 0,
+          },
+          '<'
+        )
+        .to(
+          '.item-move',
+          {
+            duration: 0.5,
+            autoAlpha: 0,
+            onComplete: () => {
+              this.isBtnShow = true
+            },
+          },
+          '<'
+        )
     },
   },
 }
@@ -138,8 +232,6 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  // height: 100%;
-  // width: 100%;
   .list {
     &-wrapper {
       position: absolute;
@@ -279,7 +371,8 @@ export default {
     top: 537px;
     left: 1052px;
   }
-  &.block3 {
+  &.block3,
+  &.block-test {
     width: 230px;
     height: 60px;
     top: 681px;
@@ -293,6 +386,20 @@ export default {
   }
 }
 
+.arrow2 {
+  width: 169px;
+  height: 146px;
+  position: absolute;
+  top: -144px;
+  left: -141px;
+  padding: 0;
+}
+.hand-finger {
+  position: absolute;
+  right: 67px;
+  bottom: -9px;
+}
+
 .list-main-item {
   padding: 8px 20px;
   display: flex;
@@ -301,7 +408,7 @@ export default {
   border: 4px solid var(--primary-default);
   border-radius: 20px;
   &:hover {
-    cursor: pointer;
+    cursor: url('@/assets/images/other/hand-finger.svg'), auto;
   }
   &.item1 {
     width: 282px;
@@ -311,13 +418,21 @@ export default {
     width: 347px;
     height: 60px;
   }
-  &.item3 {
+  &.item3,
+  &.item-test {
     width: 230px;
     height: 60px;
   }
   &.item4 {
     width: 328px;
     height: 96px;
+  }
+  &.item-move {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 60px;
   }
   &.done {
     width: 416px;
@@ -328,5 +443,15 @@ export default {
   &.ghost {
     border-color: var(--primary-dark) !important;
   }
+}
+
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 1s ease;
+}
+.fade-enter-to {
+  opacity: 1;
 }
 </style>

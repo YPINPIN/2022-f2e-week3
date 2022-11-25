@@ -3,7 +3,7 @@
     <section class="bg">
       <div class="bg-back"></div>
     </section>
-    <section class="content content-1" v-if="content === 1">
+    <section class="content">
       <div class="role-wrapper">
         <img class="role-hole" src="@/assets/images/role/hole.png" alt="hole" />
         <img
@@ -35,9 +35,7 @@
         依序排列要執行的優先順序 , 對齊產品目標 。 最後排出產品待辦清單 (Product
         Backlog) 唷 !
       </DialogRole>
-      <div class="click-mask" @click="setNext(3)">
-        <div class="click-tip highlight">點擊畫面任意處繼續</div>
-      </div>
+      <ClickMask class="click-mask-1" :isBg="false" @mask-click="setNext(3)" />
       <!-- //////////////// -->
       <DialogRole
         v-if="isShow > 1"
@@ -68,7 +66,6 @@
         left="403px"
         width="997px"
         height="152px"
-        @done="setNext(7)"
       >
         在這階段我們要把需求放進產品待辦清單 , 並調整其優先順序。<br />
         對了 ! 我們公司也推薦使用
@@ -79,9 +76,36 @@
         />
         來做任務的管理呢 !
       </DialogRole>
-
       <!-- 產品代辦清單區域 -->
-      <ProductBacklog v-if="isShow > 2" />
+      <ProductBacklog
+        v-if="isShow > 2"
+        @btn-mask="setNext(6)"
+        @btn-done="setNext(7)"
+      />
+      <DialogRole
+        v-if="isShow > 3"
+        class="dialog-4"
+        top="52px"
+        left="403px"
+        width="997px"
+        height="163px"
+      >
+        <h2>換你來試試看吧 !</h2>
+        提示 : 請把需求拖移至產品待辦清單 , 並調整其優先順序 。
+      </DialogRole>
+
+      <!-- //////////////// -->
+      <DialogRole
+        v-if="isShow > 4"
+        class="dialog-5"
+        top="52px"
+        left="403px"
+        width="997px"
+        height="128px"
+      >
+        <h2>哇喔完成惹 , 尼太棒ㄌ！ 我們繼續吧 !</h2>
+      </DialogRole>
+      <ClickMask class="click-mask-2" @mask-click="setNext(8)" />
     </section>
   </section>
 </template>
@@ -89,6 +113,7 @@
 <script>
 import gsap from 'gsap'
 import DialogRole from '../DialogRole.vue'
+import ClickMask from '../ClickMask.vue'
 import ButtomUI from '../ButtomUI.vue'
 import ProductBacklog from '../ProductBacklog.vue'
 export default {
@@ -96,21 +121,18 @@ export default {
   data() {
     return {
       isShow: 0,
-      content: 1,
     }
   },
   components: {
     DialogRole,
+    ClickMask,
     ButtomUI,
     ProductBacklog,
   },
   mounted() {
-    gsap.set(['.click-mask', '.btn-ready', '.dialog-3'], {
+    gsap.set(['.click-mask-1', '.btn-ready', '.click-mask-2'], {
       autoAlpha: 0,
     })
-    // gsap.set(['.role-po'], {
-    //   opacity: 0,
-    // })
     const timeline = gsap.timeline()
     timeline
       .to('.bg-back', {
@@ -145,17 +167,17 @@ export default {
       console.log('setNext :', next)
       switch (next) {
         case 2:
-          console.log('show click mask')
-          gsap.to('.click-mask', {
+          console.log('show click mask 1')
+          gsap.to('.click-mask-1', {
             duration: 0.5,
             autoAlpha: 1,
           })
           break
         case 3:
-          console.log('close click mask and dialog')
+          console.log('close click mask 1 and dialog 1 show dialog 2')
           const timeline = gsap.timeline()
           timeline
-            .to('.click-mask', {
+            .to('.click-mask-1', {
               duration: 0.5,
               autoAlpha: 0,
             })
@@ -179,16 +201,6 @@ export default {
           })
           break
         case 5:
-          console.log('show btn-ready')
-          gsap.to('.btn-ready', {
-            duration: 0.5,
-            autoAlpha: 1,
-            onComplete: () => {
-              this.setNext(6)
-            },
-          })
-          break
-        case 6:
           console.log('close btn-ready and dialog 2')
           const timeline2 = gsap.timeline()
           timeline2
@@ -208,11 +220,40 @@ export default {
               '<'
             )
           break
+        case 6:
+          console.log('close dialog 3 show dialog 4')
+          gsap.to('.dialog-3', {
+            duration: 0.5,
+            autoAlpha: 0,
+            onComplete: () => {
+              this.isShow = 4
+            },
+          })
+          break
+        case 7:
+          console.log('close dialog 4 show click mask 2 and dialog 5')
+          const timeline3 = gsap.timeline()
+          timeline3
+            .to('.dialog-4', {
+              duration: 0.5,
+              autoAlpha: 0,
+              onComplete: () => {
+                this.isShow = 5
+              },
+            })
+            .to('.click-mask-2', {
+              duration: 0.5,
+              autoAlpha: 1,
+            })
+          break
+        case 8:
+          console.log('go to next step')
+          this.$store.commit('onNextStep')
+          break
         default:
           break
       }
     },
-    content2Anim() {},
   },
 }
 </script>
@@ -254,6 +295,7 @@ export default {
     position: absolute;
     top: 30px;
     left: 30px;
+    z-index: 8;
   }
   &-hole {
     width: 324px;
@@ -290,29 +332,6 @@ export default {
     border: 1px solid blue;
     opacity: 0;
     transform: scaleY(0);
-  }
-}
-
-.click {
-  &-mask {
-    position: relative;
-    margin: 0 auto;
-    max-width: 1440px;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0);
-  }
-  &-tip {
-    padding: 8px 40px;
-    position: absolute;
-    min-width: 268px;
-    min-height: 52px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%);
-    color: var(--primary-default);
-    border: 2px solid var(--primary-default);
-    border-radius: 20px;
   }
 }
 </style>

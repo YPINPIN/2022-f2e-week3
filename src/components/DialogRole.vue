@@ -93,6 +93,7 @@ export default {
 .dialog {
   &-wrapper {
     position: absolute;
+    z-index: 8;
     padding: 40px 84px 40px 100px;
 
     box-shadow: 0px 0px 24px 8px rgba(0, 255, 224, 0.8),
@@ -158,7 +159,7 @@ export default {
   opacity: 0;
 }
 .fade-enter-active {
-  transition: opacity 1s ease;
+  transition: opacity 0.8s ease;
 }
 .fade-enter-to {
   opacity: 1;
