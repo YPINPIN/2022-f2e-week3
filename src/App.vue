@@ -2,6 +2,7 @@
   <ProgressBar />
   <Step0 v-if="step === 0"></Step0>
   <Step1 v-else-if="step === 1"></Step1>
+  <Step2 v-else-if="step === 2"></Step2>
 
   <footer>
     <p>© 2022 The F2E | UI Design - EG | F2E - PINPIN</p>
@@ -13,6 +14,7 @@ import { mapState } from 'vuex'
 import ProgressBar from './components/ProgressBar.vue'
 import Step0 from './components/step/Step0.vue'
 import Step1 from './components/step/Step1.vue'
+import Step2 from './components/step/Step2.vue'
 
 export default {
   computed: {
@@ -22,6 +24,7 @@ export default {
     ProgressBar,
     Step0,
     Step1,
+    Step2,
   },
 }
 </script>
@@ -37,6 +40,7 @@ footer {
   position: fixed;
   left: 0;
   bottom: 0;
+  z-index: 10;
   background: rgba(10, 13, 20, 0.8);
   p {
     font-family: 'Noto Sans TC', sans-serif;
