@@ -13,16 +13,20 @@
           <div class="list-bg-item"></div>
         </div>
         <!-- 目標列表 -->
-        <div class="list-main">
-          <!-- <div class="list-main-item item1 done">應徵者的線上履歷編輯器</div>
-          <div class="list-main-item item2 done">
-            會員系統（登入、註冊、權限管理）
-          </div>
-          <div class="list-main-item item3 done">前台職缺列表、應徵</div>
-          <div class="list-main-item item4 done">
-            後台職缺管理功能（資訊上架、下架、顯示應徵者資料）
-          </div> -->
-        </div>
+        <draggable
+          class="list-main"
+          v-model="myList"
+          :group="{ name: 'product', pull: false }"
+          ghost-class="ghost"
+          animation="800"
+          item-key="id"
+        >
+          <template #item="{ element }">
+            <div :class="['list-main-item', `item${element.id}`, 'done']">
+              {{ element.info }}
+            </div>
+          </template>
+        </draggable>
       </div>
       <div class="list-bg1"></div>
       <div class="list-bg2"></div>
@@ -33,20 +37,98 @@
         <p class="capation">低</p>
       </div>
     </div>
-    <div class="start-block">
-      <div class="list-main-item item1">應徵者的線上履歷編輯器</div>
-      <div class="list-main-item item4">
-        後台職缺管理功能（資訊上架、下架、顯示應徵者資料）
-      </div>
-      <div class="list-main-item item2">會員系統（登入、註冊、權限管理）</div>
-      <div class="list-main-item item3">前台職缺列表、應徵</div>
-    </div>
+    <!-- 起始列表 -->
+    <draggable
+      class="start-block block1"
+      v-model="myItem1"
+      :group="{ name: 'product', put: false }"
+      ghost-class="ghost"
+      animation="1000"
+      item-key="id"
+    >
+      <template #item="{ element }">
+        <div :class="['list-main-item', `item${element.id}`]">
+          {{ element.info }}
+        </div>
+      </template>
+    </draggable>
+    <draggable
+      class="start-block block2"
+      v-model="myItem2"
+      :group="{ name: 'product', put: false }"
+      ghost-class="ghost"
+      animation="800"
+      item-key="id"
+    >
+      <template #item="{ element }">
+        <div :class="['list-main-item', `item${element.id}`]">
+          {{ element.info }}
+        </div>
+      </template>
+    </draggable>
+    <draggable
+      class="start-block block3"
+      v-model="myItem3"
+      :group="{ name: 'product', put: false }"
+      ghost-class="ghost"
+      animation="800"
+      item-key="id"
+    >
+      <template #item="{ element }">
+        <div :class="['list-main-item', `item${element.id}`]">
+          {{ element.info }}
+        </div>
+      </template>
+    </draggable>
+    <draggable
+      class="start-block block4"
+      v-model="myItem4"
+      :group="{ name: 'product', put: false }"
+      ghost-class="ghost"
+      animation="800"
+      item-key="id"
+    >
+      <template #item="{ element }">
+        <div :class="['list-main-item', `item${element.id}`]">
+          {{ element.info }}
+        </div>
+      </template>
+    </draggable>
   </div>
+  <ButtomUI
+    text="我完成了"
+    :isDisable="isBtnDisable"
+    top="calc(100% - 84px - 66px)"
+    left="calc(100% - 40px - 94px)"
+  />
 </template>
 
 <script>
+import draggable from 'vuedraggable'
+import ButtomUI from './ButtomUI.vue'
+
 export default {
   name: 'ProductBacklog',
+  data() {
+    return {
+      myItem1: [{ id: 1, info: '應徵者的線上履歷編輯器' }],
+      myItem2: [{ id: 2, info: '會員系統（登入、註冊、權限管理）' }],
+      myItem3: [{ id: 3, info: '前台職缺列表、應徵' }],
+      myItem4: [
+        { id: 4, info: '後台職缺管理功能（資訊上架、下架、顯示應徵者資料）' },
+      ],
+      myList: [],
+    }
+  },
+  components: {
+    draggable,
+    ButtomUI,
+  },
+  computed: {
+    isBtnDisable() {
+      return this.myList.length !== 4
+    },
+  },
 }
 </script>
 
@@ -70,6 +152,7 @@ export default {
       position: absolute;
       top: 0;
       left: 0;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -91,7 +174,6 @@ export default {
       position: absolute;
       top: 0;
       left: 0;
-      z-index: -1;
       width: 500px;
       height: 596px;
       background: rgba(0, 255, 224, 0.3);
@@ -185,57 +267,66 @@ export default {
 
 .start-block {
   position: absolute;
-  top: 0;
-  left: 0;
-  .drag-block {
-    width: 100px;
-    height: 50px;
-    border: 1px solid red;
+  &.block1 {
+    width: 282px;
+    height: 60px;
+    top: 535px;
+    left: 147px;
+  }
+  &.block2 {
+    width: 347px;
+    height: 60px;
+    top: 537px;
+    left: 1052px;
+  }
+  &.block3 {
+    width: 230px;
+    height: 60px;
+    top: 681px;
+    left: 1027px;
+  }
+  &.block4 {
+    width: 328px;
+    height: 96px;
+    top: 654px;
+    left: 49px;
   }
 }
 
 .list-main-item {
-  position: absolute;
-  top: 0;
-  left: 0;
   padding: 8px 20px;
   display: flex;
   align-items: center;
   background: var(--bg-dark-60);
   border: 4px solid var(--primary-default);
   border-radius: 20px;
+  &:hover {
+    cursor: pointer;
+  }
   &.item1 {
     width: 282px;
     height: 60px;
-    top: 535px;
-    left: 147px;
   }
   &.item2 {
     width: 347px;
     height: 60px;
-    top: 537px;
-    left: 1052px;
   }
   &.item3 {
     width: 230px;
     height: 60px;
-    top: 681px;
-    left: 1027px;
   }
   &.item4 {
     width: 328px;
     height: 96px;
-    top: 654px;
-    left: 49px;
   }
   &.done {
-    position: static;
     width: 416px;
     height: 96px;
     backdrop-filter: blur(2px);
   }
+
   &.ghost {
-    opacity: 0.3;
+    border-color: var(--primary-dark) !important;
   }
 }
 </style>
