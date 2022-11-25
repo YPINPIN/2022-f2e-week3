@@ -12,13 +12,16 @@
           <div class="list-bg-item"></div>
           <div class="list-bg-item"></div>
         </div>
+        <!-- 目標列表 -->
         <div class="list-main">
-          <!-- <div class="list-main-item">
+          <!-- <div class="list-main-item item1 done">應徵者的線上履歷編輯器</div>
+          <div class="list-main-item item2 done">
+            會員系統（登入、註冊、權限管理）
+          </div>
+          <div class="list-main-item item3 done">前台職缺列表、應徵</div>
+          <div class="list-main-item item4 done">
             後台職缺管理功能（資訊上架、下架、顯示應徵者資料）
           </div> -->
-          <!-- <div class="list-main-item">會員系統（登入、註冊、權限管理）</div>
-              <div class="list-main-item">應徵者的線上履歷編輯器</div>
-              <div class="list-main-item">前台職缺列表、應徵</div> -->
         </div>
       </div>
       <div class="list-bg1"></div>
@@ -29,6 +32,14 @@
         <img src="@/assets/images/other/arrow.svg" alt="" />
         <p class="capation">低</p>
       </div>
+    </div>
+    <div class="start-block">
+      <div class="list-main-item item1">應徵者的線上履歷編輯器</div>
+      <div class="list-main-item item4">
+        後台職缺管理功能（資訊上架、下架、顯示應徵者資料）
+      </div>
+      <div class="list-main-item item2">會員系統（登入、註冊、權限管理）</div>
+      <div class="list-main-item item3">前台職缺列表、應徵</div>
     </div>
   </div>
 </template>
@@ -117,18 +128,6 @@ export default {
       align-items: flex-start;
       padding: 0px;
       gap: 16px;
-
-      &-item {
-        width: 416px;
-        height: 96px;
-        padding: 12px 24px;
-        display: flex;
-        align-items: center;
-        background: var(--bg-dark-60);
-        border: 4px solid var(--primary-default);
-        backdrop-filter: blur(2px);
-        border-radius: 20px;
-      }
     }
     &-bg1 {
       position: absolute;
@@ -181,6 +180,62 @@ export default {
       padding: 0px;
       gap: 6px;
     }
+  }
+}
+
+.start-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  .drag-block {
+    width: 100px;
+    height: 50px;
+    border: 1px solid red;
+  }
+}
+
+.list-main-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  background: var(--bg-dark-60);
+  border: 4px solid var(--primary-default);
+  border-radius: 20px;
+  &.item1 {
+    width: 282px;
+    height: 60px;
+    top: 535px;
+    left: 147px;
+  }
+  &.item2 {
+    width: 347px;
+    height: 60px;
+    top: 537px;
+    left: 1052px;
+  }
+  &.item3 {
+    width: 230px;
+    height: 60px;
+    top: 681px;
+    left: 1027px;
+  }
+  &.item4 {
+    width: 328px;
+    height: 96px;
+    top: 654px;
+    left: 49px;
+  }
+  &.done {
+    position: static;
+    width: 416px;
+    height: 96px;
+    backdrop-filter: blur(2px);
+  }
+  &.ghost {
+    opacity: 0.3;
   }
 }
 </style>
