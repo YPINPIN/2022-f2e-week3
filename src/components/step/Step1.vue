@@ -81,25 +81,7 @@
       </DialogRole>
 
       <!-- 產品代辦清單區域 -->
-      <div class="product" v-if="isShow > 2">
-        <div class="product-block">
-          <div class="list-wrapper">
-            <div class="list-title">
-              <h2>產品待辦清單</h2>
-              <p class="capation">Product Backlog</p>
-            </div>
-            <div class="list-main">
-              <div class="list-item"></div>
-              <div class="list-item"></div>
-              <div class="list-item"></div>
-              <div class="list-item"></div>
-            </div>
-            <div class="list-bg1"></div>
-            <div class="list-bg2"></div>
-            <div class="list-light"></div>
-          </div>
-        </div>
-      </div>
+      <ProductBacklog v-if="isShow > 2" />
     </section>
   </section>
 </template>
@@ -108,7 +90,7 @@
 import gsap from 'gsap'
 import DialogRole from '../DialogRole.vue'
 import ButtomUI from '../ButtomUI.vue'
-
+import ProductBacklog from '../ProductBacklog.vue'
 export default {
   name: 'Step1',
   data() {
@@ -120,6 +102,7 @@ export default {
   components: {
     DialogRole,
     ButtomUI,
+    ProductBacklog,
   },
   mounted() {
     gsap.set(['.click-mask', '.btn-ready', '.dialog-3'], {
@@ -330,37 +313,6 @@ export default {
     color: var(--primary-default);
     border: 2px solid var(--primary-default);
     border-radius: 20px;
-  }
-}
-
-.product {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  &-block {
-    position: relative;
-    margin: 0 auto;
-    max-width: 1440px;
-    height: 1024px;
-    width: 100%;
-    // height: 100%;
-    .list {
-      &-wrapper {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 500px;
-        height: 596px;
-        background: rgba(0, 255, 224, 0.3);
-        backdrop-filter: blur(5px);
-        /* Note: backdrop-filter has minimal browser support */
-
-        border-radius: 20px;
-      }
-    }
   }
 }
 </style>
