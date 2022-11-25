@@ -71,18 +71,24 @@
         @done="setNext(7)"
       >
         在這階段我們要把需求放進產品待辦清單 , 並調整其優先順序。<br />
-        對了 ! 我們公司也推薦使用 jira 來做任務的管理呢 !
+        對了 ! 我們公司也推薦使用
+        <img
+          class="inline-logo logo-jira"
+          src="@/assets/images/logo/logo_jira_w.svg"
+          alt="logo_jira"
+        />
+        來做任務的管理呢 !
       </DialogRole>
 
       <!-- 產品代辦清單區域 -->
-      <!-- <div class="product" v-if="isShow > 2">
+      <div class="product" v-if="isShow > 2">
         <div class="product-block">
           <div class="list-wrapper">
             <div class="list-title">
               <h2>產品待辦清單</h2>
               <p class="capation">Product Backlog</p>
             </div>
-            <div class="list">
+            <div class="list-main">
               <div class="list-item"></div>
               <div class="list-item"></div>
               <div class="list-item"></div>
@@ -93,7 +99,7 @@
             <div class="list-light"></div>
           </div>
         </div>
-      </div> -->
+      </div>
     </section>
   </section>
 </template>
@@ -119,6 +125,9 @@ export default {
     gsap.set(['.click-mask', '.btn-ready', '.dialog-3'], {
       autoAlpha: 0,
     })
+    // gsap.set(['.role-po'], {
+    //   opacity: 0,
+    // })
     const timeline = gsap.timeline()
     timeline
       .to('.bg-back', {
@@ -129,10 +138,11 @@ export default {
         duration: 0.3,
         scaleX: 0,
       })
-      .from('.role-po', {
+      .to('.role-po', {
         duration: 0.5,
-        top: -304,
-        scaleY: 0,
+        top: 0,
+        scaleY: 1,
+        opacity: 1,
         ease: 'back.out(1)',
       })
       .from(
@@ -232,7 +242,7 @@ export default {
   left: 0;
   z-index: -100;
   width: 100%;
-  height: 100%;
+  height: 1024px;
   background: var(--bg-dark);
 
   &-back {
@@ -252,12 +262,8 @@ export default {
   position: relative;
   margin: 0 auto;
   max-width: 1440px;
-  height: 100vh;
-  // top: 0;
-  // left: 0;
-  // width: 100%;
-  // height: 100%;
-  border: 1px solid red;
+  height: 1024px;
+  border: 1px solid green;
 }
 
 .role {
@@ -295,10 +301,12 @@ export default {
     width: 320px;
     height: 304px;
     position: absolute;
-    top: 0;
+    top: -304;
     left: 0;
     transform-origin: top;
     border: 1px solid blue;
+    opacity: 0;
+    transform: scaleY(0);
   }
 }
 
@@ -335,8 +343,24 @@ export default {
     position: relative;
     margin: 0 auto;
     max-width: 1440px;
+    height: 1024px;
     width: 100%;
-    height: 100%;
+    // height: 100%;
+    .list {
+      &-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        height: 596px;
+        background: rgba(0, 255, 224, 0.3);
+        backdrop-filter: blur(5px);
+        /* Note: backdrop-filter has minimal browser support */
+
+        border-radius: 20px;
+      }
+    }
   }
 }
 </style>

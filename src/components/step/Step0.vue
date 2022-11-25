@@ -209,7 +209,7 @@ export default {
   left: 0;
   z-index: -100;
   width: 100%;
-  height: 100%;
+  height: 1024px;
   background: var(--bg-dark);
 
   &-back {
@@ -291,7 +291,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 1024px;
   &-logo {
     position: absolute;
     left: 50%;
