@@ -4,21 +4,7 @@
       <div class="bg-back"></div>
     </section>
     <section class="content">
-      <div class="role-wrapper">
-        <img class="role-hole" src="@/assets/images/role/hole.png" alt="hole" />
-        <img
-          class="role-po-light"
-          src="@/assets/images/role/role_po_light.png"
-          alt="role_po_light"
-        />
-        <div class="role-mask">
-          <img
-            class="role-po"
-            src="@/assets/images/role/role_po.png"
-            alt="role_po"
-          />
-        </div>
-      </div>
+      <Role :isAnim="false" role="po" @done="setNext(1)" />
       <DialogRole
         v-if="isShow > 0"
         class="dialog-1"
@@ -28,28 +14,56 @@
         height="224px"
         @done="setNext(2)"
       >
-        <span class="text-tint">\ 碰 / </span>我是短衝小精靈 , 開發 A 組的 PO 。
-        <br />
-        <span class="text-tint"> PO 也就是產品負責人(Product Owner) </span>,
-        產品負責人會負責評估產品待辦清單的價值與重要性，
-        依序排列要執行的優先順序 , 對齊產品目標 。 最後排出產品待辦清單 (Product
-        Backlog) 唷 !
+        產品待辦清單好了之後 , 我們來召集 ScrumMaster 和開發團隊共同召開<span
+          class="text-tint"
+          >短衝規劃會議(Sprint Planning)</span
+        >。 短衝即是一個迭代 , 具有固定時間限制 , 我們會在這個會議中 ,
+        決定要完成哪些工作事項來達到商業需求 , 列出短衝待辦清單 (Sprint Backlog)
+        , 並由開發團隊在接下來的產品開發週期裡執行。
       </DialogRole>
+      <Role
+        v-if="isShow > 1"
+        role="sm"
+        top="972px"
+        left="1409px"
+        :rota="180"
+        @done="setNext(3)"
+      />
+      <Info1 class="info-1" v-if="isShow > 2" @done="setNext(4)" />
       <ClickMask
+        v-if="isShow > 3"
         class="click-mask-1"
         :isBg="false"
         :isTip="false"
-        @mask-click="onMaskClick"
+        @mask-click="setNext(5)"
       />
+      <!-- ////////////// -->
+      <DialogRoleMM
+        v-if="isShow > 4"
+        class="dialog-2"
+        top="788px"
+        left="50px"
+        width="997px"
+        height="152px"
+        @done="setNext(6)"
+      >
+        哦哦 , 你是新來的前端吧 ! 我是這次的
+        <span class="text-tint">ScrumMaster MM</span>> ,
+        我的工作主要是促成開發團隊成員協作 、 引導團隊進行自省會議 ,
+        提升團隊成員對 Scrum 瞭解 。
+      </DialogRoleMM>
     </section>
   </section>
 </template>
 
 <script>
 import gsap from 'gsap'
+import Role from '../Role.vue'
 import DialogRole from '../DialogRole.vue'
+import DialogRoleMM from '../DialogRoleMM.vue'
 import ClickMask from '../ClickMask.vue'
 import ButtomUI from '../ButtomUI.vue'
+import Info1 from '../Info1.vue'
 
 export default {
   name: 'Step2',
@@ -59,21 +73,66 @@ export default {
     }
   },
   components: {
+    Role,
     DialogRole,
+    DialogRoleMM,
     ClickMask,
     ButtomUI,
+    Info1,
   },
-  mounted() {},
   methods: {
     setNext(next) {
       console.log('setNext :', next)
       switch (next) {
+        case 1:
+          console.log('show dialog 1')
+          this.isShow = 1
+          break
+        case 2:
+          console.log('show role 2')
+          this.isShow = 2
+          break
+        case 3:
+          console.log('show info 1')
+          this.isShow = 3
+          break
+        case 4:
+          console.log('show mask click')
+          this.isShow = 4
+          break
+        case 5:
+          console.log('close  mask 1, info1 and dialog 1 show dialog 2')
+          this.isShow = 5
+          const timeline = gsap.timeline()
+          timeline
+            .to('.click-mask-1', {
+              duration: 0.5,
+              autoAlpha: 0,
+            })
+            .to(
+              '.info-1',
+              {
+                duration: 0.5,
+                autoAlpha: 0,
+              },
+              '<'
+            )
+            .to(
+              '.dialog-1',
+              {
+                duration: 0.5,
+                autoAlpha: 0,
+                onComplete: () => {
+                  // close role 1
+                  console.log(' close role 1')
+                },
+              },
+              '<'
+            )
+          break
         default:
           break
       }
-    },
-    onMaskClick() {
-      console.log('onMaskClick')
     },
   },
 }
@@ -109,50 +168,5 @@ export default {
   max-width: 1440px;
   height: 1024px;
   border: 1px solid green;
-}
-
-.role {
-  &-wrapper {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    z-index: 8;
-  }
-  &-hole {
-    width: 324px;
-    height: 83px;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  &-po-light {
-    width: 467px;
-    height: 454px;
-    position: absolute;
-    top: 7px;
-    left: -71px;
-    border: 1px solid orange;
-  }
-  &-mask {
-    position: absolute;
-    top: 7px;
-    left: 0;
-    width: 320px;
-    height: 350px;
-    overflow: hidden;
-    border: 1px solid green;
-    border-radius: 100px;
-  }
-  &-po {
-    width: 320px;
-    height: 304px;
-    position: absolute;
-    top: -304;
-    left: 0;
-    transform-origin: top;
-    border: 1px solid blue;
-    // opacity: 0;
-    // transform: scaleY(0);
-  }
 }
 </style>
