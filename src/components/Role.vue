@@ -103,6 +103,7 @@ export default {
 <style lang="scss" scoped>
 .role {
   &-wrapper {
+    pointer-events: none;
     position: absolute;
     top: 30px;
     left: 30px;
