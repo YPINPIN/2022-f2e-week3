@@ -4,7 +4,7 @@
       <div class="bg-back"></div>
     </section>
     <section class="content">
-      <Role :isAnim="false" role="po" @done="setNext(1)" />
+      <Role ref="roleP" :isAnim="false" role="po" @done="setNext(1)" />
       <DialogRole
         v-if="isShow > 0"
         class="dialog-1"
@@ -123,12 +123,15 @@ export default {
                 duration: 0.5,
                 autoAlpha: 0,
                 onComplete: () => {
-                  // close role 1
                   console.log(' close role 1')
+                  this.$refs.roleP.close()
                 },
               },
               '<'
             )
+          break
+        case 6:
+          console.log('show info 2')
           break
         default:
           break

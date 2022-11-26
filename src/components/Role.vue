@@ -57,7 +57,7 @@ export default {
       default: 0,
     },
   },
-  emits: ['done'],
+  emits: ['done', 'close'],
   mounted() {
     if (!this.isAnim) {
       gsap.set(this.$refs.img, {
@@ -95,6 +95,33 @@ export default {
   methods: {
     getImageUrl(imagePath) {
       return new URL(`/src/assets/${imagePath}`, import.meta.url).href
+    },
+    close() {
+      const timeline = gsap.timeline()
+      timeline
+        .to(this.$refs.light, {
+          duration: 0.5,
+          top: -304,
+          autoAlpha: 0,
+        })
+        .to(
+          this.$refs.img,
+          {
+            duration: 0.5,
+            top: -304,
+            scaleY: 0,
+            autoAlpha: 0,
+            onComplete: () => {
+              this.$emit('close')
+            },
+          },
+          '<'
+        )
+        .to(this.$refs.hole, {
+          duration: 0.3,
+          scaleX: 0,
+          autoAlpha: 0,
+        })
     },
   },
 }
