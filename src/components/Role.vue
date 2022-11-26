@@ -4,17 +4,24 @@
     :style="{
       top: `${top}`,
       left: `${left}`,
-      transform: `'rotate(${rota}deg)'`,
+      rotate: `${rota}deg`,
     }"
   >
-    <img class="role-hole" src="@/assets/images/role/hole.png" alt="hole" />
     <img
+      ref="hole"
+      class="role-hole"
+      src="@/assets/images/role/hole.png"
+      alt="hole"
+    />
+    <img
+      ref="light"
       class="role-light"
       :src="getImageUrl(`images/role/role_${role}_light.png`)"
       :alt="`role_${role}_light`"
     />
     <div class="role-mask">
       <img
+        ref="img"
         class="role-img"
         :src="getImageUrl(`images/role/role_${role}.png`)"
         :alt="`role_${role}`"
@@ -28,9 +35,6 @@ import gsap from 'gsap'
 
 export default {
   name: 'Role',
-  data() {
-    return {}
-  },
   props: {
     isAnim: {
       type: Boolean,
@@ -56,7 +60,7 @@ export default {
   emits: ['done'],
   mounted() {
     if (!this.isAnim) {
-      gsap.set(['.role-img'], {
+      gsap.set(this.$refs.img, {
         scaleY: 1,
         opacity: 1,
       })
@@ -64,11 +68,11 @@ export default {
     } else {
       const timeline = gsap.timeline()
       timeline
-        .from('.role-hole', {
+        .from(this.$refs.hole, {
           duration: 0.3,
           scaleX: 0,
         })
-        .to('.role-img', {
+        .to(this.$refs.img, {
           duration: 0.5,
           top: 0,
           scaleY: 1,
@@ -76,7 +80,7 @@ export default {
           ease: 'back.out(1)',
         })
         .from(
-          '.role-light',
+          this.$refs.light,
           {
             duration: 0.5,
             opacity: 0,
