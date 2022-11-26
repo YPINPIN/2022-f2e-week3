@@ -4,21 +4,7 @@
       <div class="bg-back"></div>
     </section>
     <section class="content">
-      <div class="role-wrapper">
-        <img class="role-hole" src="@/assets/images/role/hole.png" alt="hole" />
-        <img
-          class="role-po-light"
-          src="@/assets/images/role/role_po_light.png"
-          alt="role_po_light"
-        />
-        <div class="role-mask">
-          <img
-            class="role-po"
-            src="@/assets/images/role/role_po.png"
-            alt="role_po"
-          />
-        </div>
-      </div>
+      <Role v-if="isShowRole" role="po" @done="setNext(1)" />
       <DialogRole
         v-if="isShow > 0"
         class="dialog-1"
@@ -112,6 +98,7 @@
 
 <script>
 import gsap from 'gsap'
+import Role from '../Role.vue'
 import DialogRole from '../DialogRole.vue'
 import ClickMask from '../ClickMask.vue'
 import ButtomUI from '../ButtomUI.vue'
@@ -121,9 +108,11 @@ export default {
   data() {
     return {
       isShow: 0,
+      isShowRole: false,
     }
   },
   components: {
+    Role,
     DialogRole,
     ClickMask,
     ButtomUI,
@@ -133,39 +122,22 @@ export default {
     gsap.set(['.click-mask-1', '.btn-ready', '.click-mask-2'], {
       autoAlpha: 0,
     })
-    const timeline = gsap.timeline()
-    timeline
-      .to('.bg-back', {
-        duration: 1,
-        autoAlpha: 1,
-      })
-      .from('.role-hole', {
-        duration: 0.3,
-        scaleX: 0,
-      })
-      .to('.role-po', {
-        duration: 0.5,
-        top: 0,
-        scaleY: 1,
-        opacity: 1,
-        ease: 'back.out(1)',
-      })
-      .from(
-        '.role-po-light',
-        {
-          duration: 0.5,
-          opacity: 0,
-          onComplete: () => {
-            this.isShow = 1
-          },
-        },
-        '<'
-      )
+    gsap.to('.bg-back', {
+      duration: 1,
+      autoAlpha: 1,
+      onComplete: () => {
+        this.isShowRole = true
+      },
+    })
   },
   methods: {
     setNext(next) {
       console.log('setNext :', next)
       switch (next) {
+        case 1:
+          console.log('show dialog 1')
+          this.isShow = 1
+          break
         case 2:
           console.log('show click mask 1')
           gsap.to('.click-mask-1', {
@@ -288,50 +260,5 @@ export default {
   max-width: 1440px;
   height: 1024px;
   border: 1px solid green;
-}
-
-.role {
-  &-wrapper {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    z-index: 8;
-  }
-  &-hole {
-    width: 324px;
-    height: 83px;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  &-po-light {
-    width: 467px;
-    height: 454px;
-    position: absolute;
-    top: 7px;
-    left: -71px;
-    border: 1px solid orange;
-  }
-  &-mask {
-    position: absolute;
-    top: 7px;
-    left: 0;
-    width: 320px;
-    height: 350px;
-    overflow: hidden;
-    border: 1px solid green;
-    border-radius: 100px;
-  }
-  &-po {
-    width: 320px;
-    height: 304px;
-    position: absolute;
-    top: -304;
-    left: 0;
-    transform-origin: top;
-    border: 1px solid blue;
-    opacity: 0;
-    transform: scaleY(0);
-  }
 }
 </style>
