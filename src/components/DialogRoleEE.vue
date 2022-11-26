@@ -92,6 +92,7 @@ export default {
 <style lang="scss" scoped>
 .dialog {
   &-wrapper {
+    pointer-events: none;
     position: absolute;
     z-index: 8;
     padding: 40px 84px 40px 100px;
