@@ -5,6 +5,7 @@
       top: `${top}`,
       left: `${left}`,
       rotate: `${rota}deg`,
+      scale: `${scale}`,
     }"
   >
     <img
@@ -55,6 +56,10 @@ export default {
     rota: {
       type: Number,
       default: 0,
+    },
+    scale: {
+      type: Number,
+      default: 1,
     },
   },
   emits: ['done', 'close'],
