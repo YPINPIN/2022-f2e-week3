@@ -25,6 +25,14 @@
   --role-team2: #ff5c00;
   --role-team-dark: #933500;
 
+  --role-po-linear: linear-gradient(
+    180deg,
+    rgba(0, 255, 224, 0) 0%,
+    rgba(0, 255, 224, 0.03) 59.9%,
+    rgba(0, 255, 224, 0.12) 78.12%,
+    rgba(0, 255, 224, 0.36) 100%
+  );
+
   --role-sm-linear: linear-gradient(
     180deg,
     rgba(211, 85, 255, 0) 0%,

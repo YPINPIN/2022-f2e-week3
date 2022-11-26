@@ -11,7 +11,7 @@
       }"
     >
       <div class="dialog-title">
-        <h3>PO</h3>
+        <h3>GG</h3>
         <div class="dialog-title-shadow"></div>
       </div>
       <div class="dialog-talk-bg"></div>
@@ -25,7 +25,7 @@
         v-show="isIconShow"
         ref="icon"
         class="dialog-icon"
-        src="@/assets/images/icon/ic_continue_po.svg"
+        src="@/assets/images/icon/ic_continue_team2.svg"
         alt="ic_continue"
       />
     </div>
@@ -35,7 +35,7 @@
 <script>
 import gsap from 'gsap'
 export default {
-  name: 'DialogRole',
+  name: 'DialogRoleGG',
   data() {
     return {
       // 是否開始顯示對話框
@@ -96,8 +96,7 @@ export default {
     z-index: 8;
     padding: 40px 84px 40px 100px;
 
-    box-shadow: 0px 0px 24px 8px rgba(0, 255, 224, 0.8),
-      0px 0px 8px 8px rgba(0, 255, 224, 0.95);
+    box-shadow: 0px 0px 24px 8px #ff5c00, 0px 0px 8px 8px #ff5c00;
     backdrop-filter: blur(5px);
     border-radius: 40px;
   }
@@ -106,7 +105,7 @@ export default {
     top: 40px;
     left: -10px;
     height: 44px;
-    background: var(--primary-default);
+    background: var(--role-team2);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -123,7 +122,7 @@ export default {
       height: 52px;
       z-index: -1;
       transform: skew(20deg, 20deg) rotate(20deg);
-      background: var(--primary-deepDark);
+      background: var(--role-team-dark);
     }
   }
   &-talk {
@@ -136,8 +135,8 @@ export default {
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: var(--role-po-linear), var(--bg-dark-60);
-      border: 2px solid var(--primary-default);
+      background: var(--role-team2-linear), var(--bg-dark-60);
+      border: 2px solid var(--role-team2);
       border-radius: 40px;
     }
   }
