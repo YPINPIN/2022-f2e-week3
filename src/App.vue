@@ -3,6 +3,7 @@
   <Step0 v-if="step === 0"></Step0>
   <Step1 v-else-if="step === 1"></Step1>
   <Step2 v-else-if="step === 2"></Step2>
+  <Step3 v-else-if="step === 3"></Step3>
 
   <footer>
     <p>© 2022 The F2E | UI Design - EG | F2E - PINPIN</p>
@@ -15,6 +16,7 @@ import ProgressBar from './components/ProgressBar.vue'
 import Step0 from './components/step/Step0.vue'
 import Step1 from './components/step/Step1.vue'
 import Step2 from './components/step/Step2.vue'
+import Step3 from './components/step/Step3.vue'
 
 export default {
   computed: {
@@ -25,6 +27,7 @@ export default {
     Step0,
     Step1,
     Step2,
+    Step3,
   },
 }
 </script>

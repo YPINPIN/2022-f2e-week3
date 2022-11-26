@@ -94,12 +94,124 @@
         @done="setNext(11)"
       />
       <Info3 class="info-3" v-if="isShow > 10" @done="setNext(12)" />
+      <div class="story-spine" v-if="isShow > 11">
+        <img src="@/assets/images/other/story_spine.png" alt="story_spine" />
+      </div>
       <ClickMask
         v-if="isShow > 11"
         class="click-mask-3"
         :isBg="false"
         :isTip="false"
         @mask-click="setNext(13)"
+      />
+      <!-- ////////////// -->
+      <div class="story story-1">
+        <img src="@/assets/images/other/story.png" alt="story_img" />
+        <div class="story-point">
+          <div class="story-point-bg">1</div>
+          <img src="@/assets/images/other/time_1.png" alt="time_1_img" />
+        </div>
+      </div>
+      <div class="story story-2 story-move">
+        <img src="@/assets/images/other/story.png" alt="story_img" />
+        <div class="story-point">
+          <div class="story-point-bg">2</div>
+          <img src="@/assets/images/other/time_2.png" alt="time_2_img" />
+        </div>
+      </div>
+      <div class="story story-3 story-move">
+        <img src="@/assets/images/other/story.png" alt="story_img" />
+        <div class="story-point">
+          <div class="story-point-bg">3</div>
+          <img src="@/assets/images/other/time_3.png" alt="time_3_img" />
+        </div>
+      </div>
+      <div class="story story-4 story-move">
+        <img src="@/assets/images/other/story.png" alt="story_img" />
+        <div class="story-point">
+          <div class="story-point-bg">5</div>
+          <img src="@/assets/images/other/time_5.png" alt="time_5_img" />
+        </div>
+      </div>
+      <div class="story story-5 story-move">
+        <img src="@/assets/images/other/story.png" alt="story_img" />
+        <div class="story-point">
+          <div class="story-point-bg">8</div>
+          <img src="@/assets/images/other/time_8.png" alt="time_8_img" />
+        </div>
+      </div>
+      <div class="story story-6 story-move">
+        <img src="@/assets/images/other/story.png" alt="story_img" />
+        <div class="story-point">
+          <div class="story-point-bg story-point-13">13</div>
+          <img
+            class="story-13"
+            src="@/assets/images/other/story_13.png"
+            alt="story_13_img"
+          />
+          <img src="@/assets/images/other/time_13.png" alt="time_13_img" />
+        </div>
+      </div>
+      <div class="story story-7 story-move">
+        <img src="@/assets/images/other/story.png" alt="story_img" />
+        <div class="story-point">
+          <div class="story-point-bg story-point-21">21</div>
+          <img
+            class="story-21"
+            src="@/assets/images/other/story_21.png"
+            alt="story_21_img"
+          />
+          <img src="@/assets/images/other/time_21.png" alt="time_21_img" />
+        </div>
+      </div>
+
+      <div class="time-large">
+        <img src="@/assets/images/other/time.png" alt="time" />
+      </div>
+      <DialogRoleEE
+        v-if="isShow > 12"
+        class="dialog-4"
+        top="52px"
+        left="50px"
+        width="790px"
+        height="188px"
+      >
+        欸新來的 , 你應該不知道點數是什麼意思吧ㄏㄏ , 我來跟你介紹一下吧～
+        <span class="text-tint">Story Point</span> 目的是為了<span
+          class="text-tint"
+          >衡量速度</span
+        >
+        , 是用大概花費的時間預估出的相對點數哦 。
+      </DialogRoleEE>
+      <ClickMask
+        v-if="isShow > 13"
+        class="click-mask-4"
+        :isBg="false"
+        :isTip="false"
+        @mask-click="setNext(14)"
+      />
+      <DialogRoleEE
+        v-if="isShow > 14"
+        class="dialog-5"
+        top="52px"
+        left="50px"
+        width="790px"
+        height="224px"
+      >
+        以
+        <span class="text-tint"
+          >「 費氏數列 」 的 1 、2 、3 、5 、8 、13 、21</span
+        >
+        來估算各項 Story 的分數 。 Story Point 越小 , 表示這個 Story
+        花費時間越少 ; 越大 , 花費時間則越多 。 如果出現了一個 21 分 ,
+        可能表示這個 Story 太龐大 , 需要再拆分細項執行唷 !
+      </DialogRoleEE>
+      <ClickMask
+        v-if="isShow > 15"
+        class="click-mask-5"
+        :isBg="false"
+        :isTip="false"
+        @mask-click="setNext(15)"
       />
     </section>
   </section>
@@ -110,6 +222,7 @@ import gsap from 'gsap'
 import Role from '../Role.vue'
 import DialogRole from '../DialogRole.vue'
 import DialogRoleMM from '../DialogRoleMM.vue'
+import DialogRoleEE from '../DialogRoleEE.vue'
 import ClickMask from '../ClickMask.vue'
 import ButtomUI from '../ButtomUI.vue'
 import Info1 from '../Info1.vue'
@@ -127,11 +240,17 @@ export default {
     Role,
     DialogRole,
     DialogRoleMM,
+    DialogRoleEE,
     ClickMask,
     ButtomUI,
     Info1,
     Info2,
     Info3,
+  },
+  mounted() {
+    gsap.set(['.story', '.time-large'], {
+      autoAlpha: 0,
+    })
   },
   methods: {
     setNext(next) {
@@ -232,11 +351,107 @@ export default {
           this.isShow = 11
           break
         case 12:
-          console.log('show mask click 3')
+          console.log('show mask click 3 and story-spine')
           this.isShow = 12
           break
         case 13:
-          console.log('close mask 3, info3 and role 2')
+          console.log('close mask 3, info3, and dialog 3')
+          const timeline3 = gsap.timeline()
+          timeline3
+            .to('.click-mask-3', {
+              duration: 0.5,
+              autoAlpha: 0,
+            })
+            .to(
+              '.story-spine',
+              {
+                duration: 0.5,
+                top: 402,
+                left: 368,
+              },
+              '<'
+            )
+            .to(
+              '.info-3',
+              {
+                duration: 0.5,
+                autoAlpha: 0,
+              },
+              '<'
+            )
+            .to(
+              '.dialog-3',
+              {
+                duration: 0.5,
+                autoAlpha: 0,
+                onComplete: () => {
+                  console.log(' close role 2 and show story , dialog 4')
+                  this.$refs.roleM.close()
+                  this.isShow = 13
+                  const timeline4 = gsap.timeline()
+                  timeline4
+                    .to('.story-1', {
+                      duration: 0.5,
+                      autoAlpha: 1,
+                    })
+                    .to('.story-move', {
+                      duration: 0.3,
+                      x: 100,
+                      autoAlpha: 1,
+                      stagger: 0.08,
+                    })
+                    .to('.time-large', {
+                      duration: 0.8,
+                      scale: 1,
+                      autoAlpha: 1,
+                      ease: 'back.out(1)',
+                      onComplete: () => {
+                        this.isShow = 14
+                      },
+                    })
+                },
+              },
+              '<'
+            )
+          break
+        case 14:
+          console.log('close mask click 4 , dialog 4 and show dialog 5 ')
+          const timeline5 = gsap.timeline()
+          timeline5
+            .to('.click-mask-4', {
+              duration: 0.5,
+              autoAlpha: 0,
+            })
+            .to('.dialog-4', {
+              duration: 0.5,
+              autoAlpha: 0,
+              onComplete: () => {
+                this.isShow = 15
+                console.log('show time move ')
+                const timeline6 = gsap.timeline()
+                timeline6
+                  .to('.time-large', {
+                    duration: 0.4,
+                    top: 363,
+                    left: 492,
+                    autoAlpha: 0,
+                    scale: 0,
+                    delay: 0.3,
+                  })
+                  .to('.story-point', {
+                    duration: 1,
+                    opacity: 1,
+                    stagger: 0.2,
+                    onComplete: () => {
+                      this.isShow = 16
+                    },
+                  })
+              },
+            })
+          break
+        case 15:
+          console.log('go to next step')
+          this.$store.commit('onNextStep')
           break
         default:
           break
@@ -276,5 +491,113 @@ export default {
   max-width: 1440px;
   height: 1024px;
   border: 1px solid green;
+}
+
+.story-spine {
+  position: absolute;
+  top: 348px;
+  left: 295px;
+  width: 55px;
+  height: 185px;
+  z-index: -1;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.story {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 195px;
+  height: 185px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  &-1 {
+    top: 402px;
+    left: 368px;
+  }
+  &-2 {
+    top: 402px;
+    left: 523px;
+  }
+  &-3 {
+    top: 402px;
+    left: 778px;
+  }
+  &-4 {
+    top: 627px;
+    left: 140px;
+  }
+  &-5 {
+    top: 627px;
+    left: 395px;
+  }
+  &-6 {
+    top: 627px;
+    left: 650px;
+  }
+  &-7 {
+    top: 627px;
+    left: 905px;
+  }
+  &-point {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    &-bg {
+      position: absolute;
+      top: 52px;
+      left: 77px;
+      width: 80px;
+      height: 80px;
+      background: rgba(0, 255, 224, 0.7);
+      border-radius: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      font-size: 44px;
+      line-height: 150%;
+    }
+    &-13 {
+      background: rgba(255, 122, 0, 0.7);
+    }
+    &-21 {
+      background: rgba(255, 0, 0, 0.7);
+    }
+    img {
+      position: absolute;
+      top: -39px;
+      left: 124px;
+      width: 110px;
+      height: 105px;
+    }
+    .story-13,
+    .story-21 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 195px;
+      height: 185px;
+    }
+  }
+}
+
+.time-large {
+  position: absolute;
+  top: 329px;
+  left: 94px;
+  width: 165px;
+  height: 165px;
+  transform: scale(0);
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
