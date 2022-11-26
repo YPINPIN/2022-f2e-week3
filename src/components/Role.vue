@@ -106,8 +106,8 @@ export default {
       timeline
         .to(this.$refs.light, {
           duration: 0.5,
-          top: -304,
-          autoAlpha: 0,
+          opacity: 0,
+          display: 'none',
         })
         .to(
           this.$refs.img,
@@ -115,7 +115,8 @@ export default {
             duration: 0.5,
             top: -304,
             scaleY: 0,
-            autoAlpha: 0,
+            opacity: 0,
+            display: 'none',
             onComplete: () => {
               this.$emit('close')
             },
