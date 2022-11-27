@@ -224,7 +224,6 @@ import DialogRole from '../DialogRole.vue'
 import DialogRoleMM from '../DialogRoleMM.vue'
 import DialogRoleEE from '../DialogRoleEE.vue'
 import ClickMask from '../ClickMask.vue'
-import ButtomUI from '../ButtomUI.vue'
 import Info1 from '../Info1.vue'
 import Info2 from '../Info2.vue'
 import Info3 from '../Info3.vue'
@@ -242,7 +241,6 @@ export default {
     DialogRoleMM,
     DialogRoleEE,
     ClickMask,
-    ButtomUI,
     Info1,
     Info2,
     Info3,
