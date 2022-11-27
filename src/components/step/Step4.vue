@@ -4,7 +4,13 @@
       <div class="bg-back"></div>
     </section>
     <section class="content">
-      <Role ref="roleE" role="team1" left="1158px" :scale="0.8" />
+      <Role
+        ref="roleE"
+        role="team1"
+        left="1158px"
+        :scale="0.8"
+        @close="setNext(10)"
+      />
       <DialogRoleEE
         v-if="isShow > 0"
         class="dialog-1"
@@ -134,12 +140,28 @@
         left="50px"
         width="1070px"
         height="199px"
-        @done="setNext(8)"
       >
         <h2>換你來試試看吧 !</h2>
         在這經典的 Surum 流程圖中 , 這些流程分別代表哪一個會議呢 ? <br />
         提示 : 把右側的三個流程拖移至正確的位置上吧 !
       </DialogRoleEE>
+      <SprintProcess v-if="isShow > 5" @btn-done="setNext(8)" />
+      <!-- //////////////// -->
+      <DialogRoleEE
+        v-if="isShow > 6"
+        class="dialog-5"
+        top="52px"
+        left="50px"
+        width="1070px"
+        height="128px"
+      >
+        <h2>哼哼沒想到你這麼快就學會惹 , 快結束了加油加油 !</h2>
+      </DialogRoleEE>
+      <ClickMask
+        v-if="isShow > 6"
+        class="click-mask-3"
+        @mask-click="setNext(9)"
+      />
     </section>
   </section>
 </template>
@@ -150,6 +172,7 @@ import Role from '../Role.vue'
 import DialogRoleEE from '../DialogRoleEE.vue'
 import ClickMask from '../ClickMask.vue'
 import ButtomUI from '../ButtomUI.vue'
+import SprintProcess from '../SprintProcess.vue'
 
 export default {
   name: 'Step3',
@@ -163,6 +186,7 @@ export default {
     DialogRoleEE,
     ClickMask,
     ButtomUI,
+    SprintProcess,
   },
   mounted() {
     gsap.set('.info, .btn-practice', {
@@ -184,7 +208,6 @@ export default {
           break
         case 3:
           console.log('close dialog 1, click mask 1 and show dialog 2')
-          const timeline = gsap.timeline()
           gsap.to('.dialog-1, .click-mask-1', {
             duration: 0.5,
             autoAlpha: 0,
@@ -243,15 +266,15 @@ export default {
             .to('.dialog-3, .info-img, .info-text, .btn-practice', {
               duration: 0.4,
               autoAlpha: 0,
-              onComplete: () => {
-                this.isShow = 6
-              },
             })
             .to(
               '.info-title',
               {
                 duration: 0.8,
                 width: '300px',
+                onComplete: () => {
+                  this.isShow = 6
+                },
               },
               '<'
             )
@@ -260,7 +283,7 @@ export default {
               {
                 duration: 0.8,
                 top: 347,
-                left: 1100,
+                left: 1090,
               },
               '<'
             )
@@ -269,7 +292,7 @@ export default {
               {
                 duration: 0.8,
                 top: 465,
-                left: 1100,
+                left: 1090,
               },
               '<'
             )
@@ -278,10 +301,31 @@ export default {
               {
                 duration: 0.8,
                 top: 583,
-                left: 1100,
+                left: 1090,
               },
               '<'
             )
+            .to('.info', {
+              duration: 0.4,
+              autoAlpha: 0,
+            })
+          break
+        case 8:
+          console.log('close dialog 4 ,and show dialog 5, click mask 3')
+          gsap.to('.dialog-4', {
+            duration: 0.5,
+            autoAlpha: 0,
+            onComplete: () => {
+              this.isShow = 7
+            },
+          })
+          break
+        case 9:
+          console.log('close role')
+          this.$refs.roleE.close()
+          break
+        case 10:
+          this.$store.commit('onNextStep')
           break
         default:
           break
