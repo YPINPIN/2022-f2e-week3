@@ -84,6 +84,7 @@
         left="878px"
         :scale="0.8"
         @done="setNext(10)"
+        @close="setNext(20)"
       />
       <Role
         v-if="isShow > 9"
@@ -213,6 +214,51 @@
         :isTip="false"
         @mask-click="setNext(15)"
       />
+      <!-- ////////////// -->
+      <DialogRoleGG
+        v-if="isShow > 16"
+        class="dialog-6"
+        top="52px"
+        left="50px"
+        width="790px"
+        height="152px"
+        @done="setNext(16)"
+      >
+        沒錯，如 EE 說的，我這邊已經把剛剛討論好的點數標上去囉～
+        你來練習把任務排到短衝待辦清單吧 !
+      </DialogRoleGG>
+      <ClickMask
+        v-if="isShow > 17"
+        class="click-mask-6"
+        :isBg="false"
+        :isTip="false"
+        @mask-click="setNext(17)"
+      />
+      <!-- ////////////////// -->
+      <DialogRoleEE
+        v-if="isShow > 18"
+        class="dialog-7"
+        top="436px"
+        left="330px"
+        width="790px"
+        height="152px"
+        @done="setNext(18)"
+      >
+        By the way , 我們平常管理任務是使用
+        <img
+          class="inline-logo logo-jira"
+          src="@/assets/images/logo/logo_jira_w.svg"
+          alt="logo_jira"
+        />
+        這套軟體 , 你有時間記得先去註冊和熟悉唷 !
+      </DialogRoleEE>
+      <ButtomUI
+        class="btn-try"
+        text="練習去囉"
+        top="calc(100% - 84px - 66px)"
+        left="calc(100% - 40px - 94px)"
+        @clickEvent="setNext(19)"
+      />
     </section>
   </section>
 </template>
@@ -223,10 +269,12 @@ import Role from '../Role.vue'
 import DialogRole from '../DialogRole.vue'
 import DialogRoleMM from '../DialogRoleMM.vue'
 import DialogRoleEE from '../DialogRoleEE.vue'
+import DialogRoleGG from '../DialogRoleGG.vue'
 import ClickMask from '../ClickMask.vue'
 import Info1 from '../Info1.vue'
 import Info2 from '../Info2.vue'
 import Info3 from '../Info3.vue'
+import ButtomUI from '../ButtomUI.vue'
 
 export default {
   name: 'Step2',
@@ -240,13 +288,15 @@ export default {
     DialogRole,
     DialogRoleMM,
     DialogRoleEE,
+    DialogRoleGG,
     ClickMask,
     Info1,
     Info2,
     Info3,
+    ButtomUI,
   },
   mounted() {
-    gsap.set(['.story', '.time-large'], {
+    gsap.set(['.story', '.time-large', '.btn-try'], {
       autoAlpha: 0,
     })
   },
@@ -448,7 +498,51 @@ export default {
             })
           break
         case 15:
-          console.log('go to next step')
+          console.log('close mask click 5, story , dialog 5 and show dialog 6')
+          gsap.to('.click-mask-5, .story, .story-spine, .dialog-5', {
+            duration: 0.5,
+            autoAlpha: 0,
+            onComplete: () => {
+              this.isShow = 17
+            },
+          })
+          break
+        case 16:
+          console.log('show click mask 6')
+          this.isShow = 18
+          break
+        case 17:
+          console.log('close click mask 6 and show dialog 7')
+          gsap.to('.click-mask-6', {
+            duration: 0.5,
+            autoAlpha: 0,
+          })
+          this.isShow = 19
+          break
+        case 18:
+          console.log('show btn-try')
+          gsap.to('.btn-try', {
+            duration: 0.5,
+            autoAlpha: 1,
+          })
+          break
+        case 19:
+          console.log('btn-try click, close dialog 7 and go to next step')
+          const timeline7 = gsap.timeline()
+          timeline7
+            .to('.btn-try, .dialog-7', {
+              duration: 0.5,
+              autoAlpha: 0,
+            })
+            .to('.dialog-6', {
+              duration: 0.5,
+              autoAlpha: 0,
+              onComplete: () => {
+                this.$refs.roleE.close()
+              },
+            })
+          break
+        case 20:
           this.$store.commit('onNextStep')
           break
         default:

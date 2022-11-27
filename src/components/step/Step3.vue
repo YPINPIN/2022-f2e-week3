@@ -5,13 +5,6 @@
     </section>
     <section class="content">
       <Role
-        ref="roleE"
-        role="team1"
-        :isAnim="false"
-        left="878px"
-        :scale="0.8"
-      />
-      <Role
         ref="roleG"
         role="team2"
         :isAnim="false"
@@ -23,11 +16,15 @@
         class="dialog-1"
         top="52px"
         left="50px"
-        width="790px"
-        height="152px"
+        width="1070px"
+        height="199px"
+        @done="setNext(2)"
       >
-        沒錯，如 EE 說的，我這邊已經把剛剛討論好的點數標上去囉～
-        你來練習把任務排到短衝待辦清單吧 !
+        <h2>換你來試試看吧 !</h2>
+        把 <span class="text-tint">「 產品待辦清單 」</span> 的項目拖進
+        <span class="text-tint">「 開發Ａ組的短衝待辦清單 」</span> 裡吧 !
+        <br />
+        提示 : 置入兩項以上的 Story , 點數總和不能超過團隊負擔上限 20 點唷 !
       </DialogRoleGG>
     </section>
   </section>
@@ -56,12 +53,16 @@ export default {
     ButtomUI,
   },
   mounted() {
-    this.isShow = 1
+    this.setNext(1)
   },
   methods: {
     setNext(next) {
       console.log('setNext :', next)
       switch (next) {
+        case 1:
+          console.log('show dialog 1')
+          this.isShow = 1
+          break
         default:
           break
       }
