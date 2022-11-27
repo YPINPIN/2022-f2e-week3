@@ -444,14 +444,4 @@ export default {
     border-color: var(--primary-dark) !important;
   }
 }
-
-.fade-enter-from {
-  opacity: 0;
-}
-.fade-enter-active {
-  transition: opacity 1s ease;
-}
-.fade-enter-to {
-  opacity: 1;
-}
 </style>
