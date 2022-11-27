@@ -162,7 +162,7 @@ export default {
   height: 0;
 }
 .show-enter-active {
-  transition: height 1s ease, opacity 0.5s ease;
+  transition: height 0.5s ease, opacity 0.2s ease;
 }
 .show-enter-to {
   height: 100%;
