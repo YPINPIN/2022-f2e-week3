@@ -55,7 +55,6 @@ import Role from '../Role.vue'
 import DialogRoleEE from '../DialogRoleEE.vue'
 import DialogRoleGG from '../DialogRoleGG.vue'
 import ClickMask from '../ClickMask.vue'
-import ButtomUI from '../ButtomUI.vue'
 import ProductBacklogPoint from '../ProductBacklogPoint.vue'
 import SprintBacklogPoint from '../SprintBacklogPoint.vue'
 
@@ -71,7 +70,6 @@ export default {
     DialogRoleEE,
     DialogRoleGG,
     ClickMask,
-    ButtomUI,
     ProductBacklogPoint,
     SprintBacklogPoint,
   },
