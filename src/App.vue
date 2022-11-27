@@ -4,6 +4,7 @@
   <Step1 v-else-if="step === 1"></Step1>
   <Step2 v-else-if="step === 2"></Step2>
   <Step3 v-else-if="step === 3"></Step3>
+  <Step4 v-else-if="step === 4"></Step4>
 
   <footer>
     <p>© 2022 The F2E | UI Design - EG | F2E - PINPIN</p>
@@ -17,6 +18,7 @@ import Step0 from './components/step/Step0.vue'
 import Step1 from './components/step/Step1.vue'
 import Step2 from './components/step/Step2.vue'
 import Step3 from './components/step/Step3.vue'
+import Step4 from './components/step/Step4.vue'
 
 export default {
   computed: {
@@ -28,6 +30,7 @@ export default {
     Step1,
     Step2,
     Step3,
+    Step4,
   },
 }
 </script>
