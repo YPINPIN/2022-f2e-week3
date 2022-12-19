@@ -272,7 +272,13 @@ export default {
           this.$refs.roleG.close()
           break
         case 6:
-          this.$store.commit('onNextStep')
+          gsap.to('.content', {
+            duration: 0.5,
+            autoAlpha: 0,
+            onComplete: () => {
+              this.$store.commit('onNextStep')
+            },
+          })
           break
         default:
           break
