@@ -296,7 +296,7 @@ export default {
     color: var(--primary-default);
     cursor: pointer;
     &:hover {
-      opacity: 0.6;
+      color: rgba(0, 255, 224, 0.6);
     }
   }
 }
