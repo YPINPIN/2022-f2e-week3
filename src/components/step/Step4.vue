@@ -196,18 +196,18 @@ export default {
   },
   methods: {
     setNext(next) {
-      console.log('setNext :', next)
+      // console.log('setNext :', next)
       switch (next) {
         case 1:
-          console.log('show dialog 1')
+          // console.log('show dialog 1')
           this.isShow = 1
           break
         case 2:
-          console.log('show click mask 1')
+          // console.log('show click mask 1')
           this.isShow = 2
           break
         case 3:
-          console.log('close dialog 1, click mask 1 and show dialog 2')
+          // console.log('close dialog 1, click mask 1 and show dialog 2')
           gsap.to('.dialog-1, .click-mask-1', {
             duration: 0.5,
             autoAlpha: 0,
@@ -215,7 +215,7 @@ export default {
           this.isShow = 3
           break
         case 4:
-          console.log('show info and click mask 2')
+          // console.log('show info and click mask 2')
           const timeline1 = gsap.timeline()
           timeline1
             .fromTo(
@@ -243,7 +243,7 @@ export default {
 
           break
         case 5:
-          console.log('close click mask 2 , dialog 2 and show dialog 3')
+          // console.log('close click mask 2 , dialog 2 and show dialog 3')
           gsap.to('.dialog-2, .click-mask-2', {
             duration: 0.5,
             autoAlpha: 0,
@@ -251,16 +251,16 @@ export default {
           this.isShow = 5
           break
         case 6:
-          console.log('show ')
+          // console.log('show ')
           gsap.to('.btn-practice', {
             duration: 0.3,
             autoAlpha: 1,
           })
           break
         case 7:
-          console.log(
-            'info title move, btn-practice, dialog 3 close, show dialog 4'
-          )
+          // console.log(
+          //   'info title move, btn-practice, dialog 3 close, show dialog 4'
+          // )
           const timeline2 = gsap.timeline()
           timeline2
             .to('.dialog-3, .info-img, .info-text, .btn-practice', {
@@ -311,7 +311,7 @@ export default {
             })
           break
         case 8:
-          console.log('close dialog 4 ,and show dialog 5, click mask 3')
+          // console.log('close dialog 4 ,and show dialog 5, click mask 3')
           gsap.to('.dialog-4', {
             duration: 0.5,
             autoAlpha: 0,
@@ -321,7 +321,7 @@ export default {
           })
           break
         case 9:
-          console.log('close role')
+          // console.log('close role')
           this.$refs.roleE.close()
           break
         case 10:

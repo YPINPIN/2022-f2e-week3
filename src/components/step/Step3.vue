@@ -78,14 +78,14 @@ export default {
   },
   methods: {
     setNext(next) {
-      console.log('setNext :', next)
+      // console.log('setNext :', next)
       switch (next) {
         case 1:
-          console.log('show dialog 1')
+          // console.log('show dialog 1')
           this.isShow = 1
           break
         case 2:
-          console.log('show click mask 1 , dialog 2 and close dialog 1')
+          // console.log('show click mask 1 , dialog 2 and close dialog 1')
           gsap.to('.dialog-1', {
             duration: 0,
             autoAlpha: 0,
@@ -93,7 +93,7 @@ export default {
           this.isShow = 2
           break
         case 3:
-          console.log('close role')
+          // console.log('close role')
           this.$refs.roleG.close()
           break
         case 4:
@@ -136,6 +136,5 @@ export default {
   margin: 0 auto;
   max-width: 1440px;
   height: 1024px;
-  border: 1px solid green;
 }
 </style>

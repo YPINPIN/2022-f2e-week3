@@ -155,7 +155,6 @@ export default {
     position: absolute;
     top: 7px;
     left: -71px;
-    border: 1px solid orange;
   }
   &-mask {
     position: absolute;
@@ -164,7 +163,6 @@ export default {
     width: 320px;
     height: 350px;
     overflow: hidden;
-    border: 1px solid green;
     border-radius: 100px;
   }
   &-img {
@@ -174,7 +172,6 @@ export default {
     top: -304;
     left: 0;
     transform-origin: top;
-    border: 1px solid blue;
     opacity: 0;
     transform: scaleY(0);
   }

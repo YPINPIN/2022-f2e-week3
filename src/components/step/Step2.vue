@@ -302,26 +302,26 @@ export default {
   },
   methods: {
     setNext(next) {
-      console.log('setNext :', next)
+      // console.log('setNext :', next)
       switch (next) {
         case 1:
-          console.log('show dialog 1')
+          // console.log('show dialog 1')
           this.isShow = 1
           break
         case 2:
-          console.log('show role 2')
+          // console.log('show role 2')
           this.isShow = 2
           break
         case 3:
-          console.log('show info 1')
+          // console.log('show info 1')
           this.isShow = 3
           break
         case 4:
-          console.log('show mask click')
+          // console.log('show mask click')
           this.isShow = 4
           break
         case 5:
-          console.log('close  mask 1, info1 and dialog 1 show dialog 2')
+          // console.log('close  mask 1, info1 and dialog 1 show dialog 2')
           this.isShow = 5
           const timeline = gsap.timeline()
           timeline
@@ -343,7 +343,7 @@ export default {
                 duration: 0.5,
                 autoAlpha: 0,
                 onComplete: () => {
-                  console.log(' close role 1')
+                  // console.log(' close role 1')
                   this.$refs.roleP.close()
                 },
               },
@@ -351,15 +351,15 @@ export default {
             )
           break
         case 6:
-          console.log('show info 2')
+          // console.log('show info 2')
           this.isShow = 6
           break
         case 7:
-          console.log('show mask click 2')
+          // console.log('show mask click 2')
           this.isShow = 7
           break
         case 8:
-          console.log('close mask 2, info2 and dialog 2 show dialog 3')
+          // console.log('close mask 2, info2 and dialog 2 show dialog 3')
           const timeline2 = gsap.timeline()
           timeline2
             .to('.click-mask-2', {
@@ -387,23 +387,23 @@ export default {
             )
           break
         case 9:
-          console.log('show role 2')
+          // console.log('show role 2')
           this.isShow = 9
           break
         case 10:
-          console.log('show role 3')
+          // console.log('show role 3')
           this.isShow = 10
           break
         case 11:
-          console.log('show info 4')
+          // console.log('show info 4')
           this.isShow = 11
           break
         case 12:
-          console.log('show mask click 3 and story-spine')
+          // console.log('show mask click 3 and story-spine')
           this.isShow = 12
           break
         case 13:
-          console.log('close mask 3, info3, and dialog 3')
+          // console.log('close mask 3, info3, and dialog 3')
           const timeline3 = gsap.timeline()
           timeline3
             .to('.click-mask-3', {
@@ -433,7 +433,7 @@ export default {
                 duration: 0.5,
                 autoAlpha: 0,
                 onComplete: () => {
-                  console.log(' close role 2 and show story , dialog 4')
+                  // console.log(' close role 2 and show story , dialog 4')
                   this.$refs.roleM.close()
                   this.isShow = 13
                   const timeline4 = gsap.timeline()
@@ -463,7 +463,7 @@ export default {
             )
           break
         case 14:
-          console.log('close mask click 4 , dialog 4 and show dialog 5 ')
+          // console.log('close mask click 4 , dialog 4 and show dialog 5 ')
           const timeline5 = gsap.timeline()
           timeline5
             .to('.click-mask-4', {
@@ -475,7 +475,7 @@ export default {
               autoAlpha: 0,
               onComplete: () => {
                 this.isShow = 15
-                console.log('show time move ')
+                // console.log('show time move ')
                 const timeline6 = gsap.timeline()
                 timeline6
                   .to('.time-large', {
@@ -498,7 +498,7 @@ export default {
             })
           break
         case 15:
-          console.log('close mask click 5, story , dialog 5 and show dialog 6')
+          // console.log('close mask click 5, story , dialog 5 and show dialog 6')
           gsap.to('.click-mask-5, .story, .story-spine, .dialog-5', {
             duration: 0.5,
             autoAlpha: 0,
@@ -508,11 +508,11 @@ export default {
           })
           break
         case 16:
-          console.log('show click mask 6')
+          // console.log('show click mask 6')
           this.isShow = 18
           break
         case 17:
-          console.log('close click mask 6 and show dialog 7')
+          // console.log('close click mask 6 and show dialog 7')
           gsap.to('.click-mask-6', {
             duration: 0.5,
             autoAlpha: 0,
@@ -520,14 +520,14 @@ export default {
           this.isShow = 19
           break
         case 18:
-          console.log('show btn-try')
+          // console.log('show btn-try')
           gsap.to('.btn-try', {
             duration: 0.5,
             autoAlpha: 1,
           })
           break
         case 19:
-          console.log('btn-try click, close dialog 7 and go to next step')
+          // console.log('btn-try click, close dialog 7 and go to next step')
           const timeline7 = gsap.timeline()
           timeline7
             .to('.btn-try, .dialog-7', {
@@ -582,7 +582,6 @@ export default {
   margin: 0 auto;
   max-width: 1440px;
   height: 1024px;
-  border: 1px solid green;
 }
 
 .story-spine {

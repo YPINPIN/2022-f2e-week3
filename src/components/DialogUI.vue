@@ -43,7 +43,7 @@ export default {
       this.$emit('startgame')
     },
     onDialogShow() {
-      console.log('onDialogShow')
+      // console.log('onDialogShow')
       this.isDialogShow = true
     },
   },

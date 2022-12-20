@@ -190,7 +190,7 @@ export default {
         })
     },
     dialogShow() {
-      console.log('dialogShow')
+      // console.log('dialogShow')
       this.$refs.dialog.onDialogShow()
     },
     nextStep() {

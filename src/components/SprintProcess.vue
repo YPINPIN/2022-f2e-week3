@@ -294,7 +294,6 @@ export default {
       left: 0;
       width: 1440px;
       height: 1024px;
-      border: 1px solid purple;
     }
     &-bg {
       position: absolute;

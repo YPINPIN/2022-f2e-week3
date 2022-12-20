@@ -194,7 +194,7 @@ export default {
       this.$emit('btn-done')
     },
     onMaskClick() {
-      console.log('onMaskClick')
+      // console.log('onMaskClick')
       this.$emit('btn-mask')
       const timeline = gsap.timeline()
       timeline

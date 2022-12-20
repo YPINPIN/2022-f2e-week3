@@ -217,18 +217,18 @@ export default {
   },
   methods: {
     setNext(next) {
-      console.log('setNext :', next)
+      // console.log('setNext :', next)
       switch (next) {
         case 1:
-          console.log('show dialog 1')
+          // console.log('show dialog 1')
           this.isShow = 1
           break
         case 2:
-          console.log('show click mask 1')
+          // console.log('show click mask 1')
           this.isShow = 2
           break
         case 3:
-          console.log('close dialog 1, click mask 1 and show dialog 2')
+          // console.log('close dialog 1, click mask 1 and show dialog 2')
           gsap.to('.dialog-1, .click-mask-1', {
             duration: 0.5,
             autoAlpha: 0,
@@ -257,8 +257,8 @@ export default {
             })
           break
         case 4:
-          console.log('完成')
-          console.log('close dialog 2 ,and show dialog 3, click mask 2')
+          // console.log('完成')
+          // console.log('close dialog 2 ,and show dialog 3, click mask 2')
           gsap.to('.dialog-2, .btn-submit', {
             duration: 0.5,
             autoAlpha: 0,
@@ -268,7 +268,7 @@ export default {
           })
           break
         case 5:
-          console.log('close role')
+          // console.log('close role')
           this.$refs.roleG.close()
           break
         case 6:
@@ -311,7 +311,7 @@ export default {
           '[name=question-1]:checked ~ .radio-mark'
         )
         if (checked) {
-          checked.classList.toggle('error')
+          checked.classList.toggle('error', true)
         }
       }
       if (this.q2 !== this.ans2) {
@@ -319,7 +319,7 @@ export default {
           '[name=question-2]:checked ~ .radio-mark'
         )
         if (checked) {
-          checked.classList.toggle('error')
+          checked.classList.toggle('error', true)
         }
       }
       if (this.q1 === this.ans1 && this.q2 === this.ans2) {

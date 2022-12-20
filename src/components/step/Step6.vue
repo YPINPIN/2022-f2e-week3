@@ -498,7 +498,6 @@ export default {
   margin: 0 auto;
   max-width: 1440px;
   height: 1024px;
-  border: 1px solid green;
   &-light {
     position: absolute;
     top: 0px;
@@ -600,7 +599,6 @@ export default {
     position: absolute;
     top: 7px;
     left: -46px;
-    // border: 1px solid orange;
   }
   &-mask {
     position: absolute;
@@ -609,7 +607,6 @@ export default {
     width: 208px;
     height: 255px;
     overflow: hidden;
-    // border: 1px solid green;
     border-radius: 50px;
   }
   &-img {
@@ -619,7 +616,6 @@ export default {
     top: -304;
     left: 0;
     transform-origin: top;
-    // border: 1px solid blue;
     opacity: 0;
     transform: scaleY(0);
   }

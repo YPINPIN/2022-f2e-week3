@@ -58,7 +58,6 @@ export default {
     left: 418px;
     width: 604px;
     height: 604px;
-    border: 1px solid white;
   }
   &-img1 {
     position: absolute;

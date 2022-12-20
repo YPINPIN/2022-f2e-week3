@@ -132,21 +132,21 @@ export default {
   },
   methods: {
     setNext(next) {
-      console.log('setNext :', next)
+      // console.log('setNext :', next)
       switch (next) {
         case 1:
-          console.log('show dialog 1')
+          // console.log('show dialog 1')
           this.isShow = 1
           break
         case 2:
-          console.log('show click mask 1')
+          // console.log('show click mask 1')
           gsap.to('.click-mask-1', {
             duration: 0.5,
             autoAlpha: 1,
           })
           break
         case 3:
-          console.log('close click mask 1 and dialog 1 show dialog 2')
+          // console.log('close click mask 1 and dialog 1 show dialog 2')
           const timeline = gsap.timeline()
           timeline
             .to('.click-mask-1', {
@@ -166,14 +166,14 @@ export default {
             )
           break
         case 4:
-          console.log('show btn-ready')
+          // console.log('show btn-ready')
           gsap.to('.btn-ready', {
             duration: 0.5,
             autoAlpha: 1,
           })
           break
         case 5:
-          console.log('close btn-ready and dialog 2')
+          // console.log('close btn-ready and dialog 2')
           const timeline2 = gsap.timeline()
           timeline2
             .to('.btn-ready', {
@@ -193,7 +193,7 @@ export default {
             )
           break
         case 6:
-          console.log('close dialog 3 show dialog 4')
+          // console.log('close dialog 3 show dialog 4')
           gsap.to('.dialog-3', {
             duration: 0.5,
             autoAlpha: 0,
@@ -203,7 +203,7 @@ export default {
           })
           break
         case 7:
-          console.log('close dialog 4 show click mask 2 and dialog 5')
+          // console.log('close dialog 4 show click mask 2 and dialog 5')
           const timeline3 = gsap.timeline()
           timeline3
             .to('.dialog-4', {
@@ -219,7 +219,7 @@ export default {
             })
           break
         case 8:
-          console.log('go to next step')
+          // console.log('go to next step')
           this.$store.commit('onNextStep')
           break
         default:
@@ -259,6 +259,5 @@ export default {
   margin: 0 auto;
   max-width: 1440px;
   height: 1024px;
-  border: 1px solid green;
 }
 </style>
