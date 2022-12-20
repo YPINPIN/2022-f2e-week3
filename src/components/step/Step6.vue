@@ -4,6 +4,7 @@
       <div class="bg-back"></div>
     </section>
     <section class="content">
+      <div class="content-light"></div>
       <div class="content-logo">
         <img src="@/assets/images/logo/logo_txt.png" alt="logo_txt" />
       </div>
@@ -112,6 +113,14 @@ export default {
           opacity: 0,
         },
         '<+0.5'
+      )
+      .from(
+        '.content-light',
+        {
+          duration: 0.8,
+          opacity: 0,
+        },
+        '<'
       )
       .from('.content-title', {
         duration: 0.6,
@@ -245,6 +254,16 @@ export default {
   max-width: 1440px;
   height: 1024px;
   border: 1px solid green;
+  &-light {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 1440px;
+    height: 160px;
+    background: var(--primary-linear);
+    opacity: 0.9;
+    transform: rotate(-180deg);
+  }
   &-logo {
     position: absolute;
     left: 50%;
