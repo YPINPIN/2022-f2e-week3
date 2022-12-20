@@ -1,4 +1,5 @@
 <template>
+  <div class="filter"></div>
   <ProgressBar />
   <Step0 v-if="step === 0"></Step0>
   <Step1 v-else-if="step === 1"></Step1>
@@ -42,6 +43,16 @@ export default {
 </script>
 
 <style lang="scss">
+.filter {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 1024px;
+  background: rgba(10, 13, 20, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: -105;
+}
 footer {
   display: flex;
   justify-content: center;

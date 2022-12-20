@@ -18,7 +18,8 @@
 body {
   background-image: url('@/assets/images/bg/bg_village.png');
   background-size: 1440px 1024px;
-  background-repeat: no-repeat;
+  background-position-x: center;
+  background-repeat: repeat-x;
 }
 
 h2 {

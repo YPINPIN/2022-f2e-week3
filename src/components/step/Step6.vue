@@ -476,9 +476,9 @@ export default {
   top: 0;
   left: 0;
   z-index: -100;
+  min-width: 1440px;
   width: 100%;
   height: 1024px;
-  background: var(--bg-dark);
 
   &-back {
     position: relative;
