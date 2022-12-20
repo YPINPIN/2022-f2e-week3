@@ -79,6 +79,17 @@
       <p class="role-text role-text-2 highlight">嗚嗚我會想尼QQ</p>
       <p class="role-text role-text-3 highlight">不愧似窩ㄉ學生</p>
       <p class="role-text role-text-4 highlight">哇喔太厲害ㄌㄅ</p>
+
+      <div class="dot-wrapper">
+        <div class="dot-item dot-1 dot-yellow"></div>
+        <div class="dot-item dot-2 dot-red"></div>
+        <div class="dot-item dot-3 dot-purple"></div>
+        <div class="dot-item dot-4 dot-blue"></div>
+        <div class="dot-item dot-5 dot-yellow"></div>
+        <div class="dot-item dot-6 dot-red"></div>
+        <div class="dot-item dot-7 dot-blue"></div>
+        <div class="dot-item dot-8 dot-purple"></div>
+      </div>
     </section>
   </section>
 </template>
@@ -205,6 +216,23 @@ export default {
         },
         '<'
       )
+      .from(
+        '.dot-wrapper',
+        {
+          duration: 0.3,
+          y: 20,
+          opacity: 0,
+        },
+        '<'
+      )
+      .add(this.dot1_tl)
+      .add(this.dot2_tl, '<')
+      .add(this.dot3_tl, '<')
+      .add(this.dot4_tl, '<')
+      .add(this.dot5_tl, '<')
+      .add(this.dot6_tl, '<')
+      .add(this.dot7_tl, '<')
+      .add(this.dot8_tl, '<')
   },
   methods: {
     setNext(next) {
@@ -219,6 +247,223 @@ export default {
     },
     reloadPage() {
       window.location.reload()
+    },
+    dot1_tl() {
+      let tl = gsap.timeline()
+      tl.to('.dot-1', {
+        duration: 0.8,
+        left: 89,
+        top: 505,
+      })
+        .to('.dot-1', {
+          duration: 0.8,
+          left: 88,
+          top: 519,
+          opacity: 0.8,
+        })
+        .to('.dot-1', {
+          duration: 0.8,
+          left: 82,
+          top: 498,
+          opacity: 0.5,
+        })
+        .to('.dot-1', {
+          duration: 0.8,
+          left: 79,
+          top: 515,
+          opacity: 1,
+        })
+        .add(this.dot1_tl)
+    },
+    dot2_tl() {
+      let tl = gsap.timeline()
+      tl.to('.dot-2', {
+        duration: 0.8,
+        left: 256,
+        top: 350,
+        opacity: 0.5,
+      })
+        .to('.dot-2', {
+          duration: 0.8,
+          left: 267,
+          top: 359,
+          opacity: 1,
+        })
+        .to('.dot-2', {
+          duration: 0.8,
+          left: 250,
+          top: 370,
+        })
+        .to('.dot-2', {
+          duration: 0.8,
+          left: 266,
+          top: 350,
+          opacity: 0.8,
+        })
+        .add(this.dot2_tl)
+    },
+    dot3_tl() {
+      let tl = gsap.timeline()
+      tl.to('.dot-3', {
+        duration: 0.8,
+        left: 55,
+        top: 180,
+        opacity: 0.5,
+      })
+        .to('.dot-3', {
+          duration: 0.8,
+          left: 58,
+          top: 199,
+          opacity: 1,
+        })
+        .to('.dot-3', {
+          duration: 0.8,
+          left: 66,
+          top: 186,
+          opacity: 0.8,
+        })
+        .to('.dot-3', {
+          duration: 0.8,
+          left: 60,
+          top: 190,
+          opacity: 1,
+        })
+        .add(this.dot3_tl)
+    },
+    dot4_tl() {
+      let tl = gsap.timeline()
+      tl.to('.dot-4', {
+        duration: 0.8,
+        left: 300,
+        top: 48,
+      })
+        .to('.dot-4', {
+          duration: 0.8,
+          left: 295,
+          top: 65,
+          opacity: 0.5,
+        })
+        .to('.dot-4', {
+          duration: 0.8,
+          left: 299,
+          top: 60,
+          opacity: 1,
+        })
+        .to('.dot-4', {
+          duration: 0.8,
+          left: 310,
+          top: 38,
+        })
+        .add(this.dot4_tl)
+    },
+    dot5_tl() {
+      let tl = gsap.timeline()
+      tl.to('.dot-5', {
+        duration: 0.8,
+        left: 1030,
+        top: 22,
+        opacity: 0.5,
+      })
+        .to('.dot-5', {
+          duration: 0.8,
+          left: 1024,
+          top: 40,
+          opacity: 1,
+        })
+        .to('.dot-5', {
+          duration: 0.8,
+          left: 1025,
+          top: 36,
+          opacity: 0.8,
+        })
+        .to('.dot-5', {
+          duration: 0.8,
+          left: 1020,
+          top: 12,
+          opacity: 1,
+        })
+        .add(this.dot5_tl)
+    },
+    dot6_tl() {
+      let tl = gsap.timeline()
+      tl.to('.dot-6', {
+        duration: 0.8,
+        left: 1274,
+        top: 200,
+        opacity: 0.8,
+      })
+        .to('.dot-6', {
+          duration: 0.8,
+          left: 1261,
+          top: 195,
+          opacity: 1,
+        })
+        .to('.dot-6', {
+          duration: 0.8,
+          left: 1267,
+          top: 200,
+          opacity: 0.5,
+        })
+        .to('.dot-6', {
+          duration: 0.8,
+          left: 1284,
+          top: 190,
+          opacity: 1,
+        })
+        .add(this.dot6_tl)
+    },
+    dot7_tl() {
+      let tl = gsap.timeline()
+      tl.to('.dot-7', {
+        duration: 0.8,
+        left: 1089,
+        top: 331,
+      })
+        .to('.dot-7', {
+          duration: 0.8,
+          left: 1089,
+          top: 331,
+          opacity: 0.5,
+        })
+        .to('.dot-7', {
+          duration: 0.8,
+          left: 1083,
+          top: 342,
+          opacity: 1,
+        })
+        .to('.dot-7', {
+          duration: 0.8,
+          left: 1079,
+          top: 341,
+        })
+        .add(this.dot7_tl)
+    },
+    dot8_tl() {
+      let tl = gsap.timeline()
+      tl.to('.dot-8', {
+        duration: 0.8,
+        left: 1240,
+        top: 537,
+        opacity: 0.5,
+      })
+        .to('.dot-8', {
+          duration: 0.8,
+          left: 1256,
+          top: 543,
+          opacity: 0.8,
+        })
+        .to('.dot-8', {
+          duration: 0.8,
+          left: 1247,
+          top: 546,
+          opacity: 1,
+        })
+        .to('.dot-8', {
+          duration: 0.8,
+          left: 1250,
+          top: 527,
+        })
+        .add(this.dot8_tl)
     },
   },
 }
@@ -402,6 +647,70 @@ export default {
     top: 712px;
     left: 1073px;
     color: var(--primary-default);
+  }
+}
+
+.dot {
+  &-wrapper {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+  &-item {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+  }
+  &-yellow {
+    background: url('@/assets/images/logo/logo_dot_yellow.png');
+    background-size: cover;
+  }
+  &-red {
+    background: url('@/assets/images/logo/logo_dot_red.png');
+    background-size: cover;
+  }
+  &-purple {
+    background: url('@/assets/images/logo/logo_dot_purple.png');
+    background-size: cover;
+  }
+  &-blue {
+    width: 134px;
+    height: 134px;
+    background: url('@/assets/images/logo/logo_dot_blue.png');
+    background-size: cover;
+  }
+  &-1 {
+    top: 515px;
+    left: 79px;
+  }
+  &-2 {
+    top: 350px;
+    left: 266px;
+    opacity: 0.8;
+  }
+  &-3 {
+    top: 190px;
+    left: 60px;
+  }
+  &-4 {
+    top: 38px;
+    left: 310px;
+  }
+  &-5 {
+    top: 12px;
+    left: 1020px;
+  }
+  &-6 {
+    top: 190px;
+    left: 1284px;
+  }
+  &-7 {
+    top: 341px;
+    left: 1079px;
+  }
+  &-8 {
+    top: 527px;
+    left: 1250px;
   }
 }
 </style>
